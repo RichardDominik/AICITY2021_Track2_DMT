@@ -202,11 +202,13 @@ class build_swin_transformer(nn.Module):
 
         print('using Transformer_type: {} as a backbone'.format(cfg.MODEL.Transformer_TYPE))
 
-        if cfg.MODEL.SIE_CAMERA:
+        
+        if cfg.MODEL.CAMERA_EMBEDDING:
             camera_num = camera_num
         else:
             camera_num = 0
-        if cfg.MODEL.SIE_VIEW:
+
+        if cfg.MODEL.VIEWPOINT_EMBEDDING:
             view_num = view_num
         else:
             view_num = 0
