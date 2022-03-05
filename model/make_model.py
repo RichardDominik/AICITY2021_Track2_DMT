@@ -7,6 +7,7 @@ from .backbones.resnest import resnest101, resnest50, resnest200, resnest269
 from .backbones.resnext_ibn import resnext101_ibn_a
 from .backbones.vit_pytorch import vit_base_patch16_224_TransReID, vit_small_patch16_224_TransReID
 from .backbones.densenet_ibn import densenet169_ibn_a
+from .backbones.swin_transformer import SwinTransformer
 from .layers.pooling import GeM, GeneralizedMeanPooling,GeneralizedMeanPoolingP
 import torch.nn.functional as F
 from loss.metric_learning import Arcface, Cosface, AMSoftmax, CircleLoss
@@ -187,7 +188,91 @@ class Backbone(nn.Module):
             self.state_dict()[i.replace('module.','')].copy_(param_dict[i])
         print('Loading pretrained model from {}'.format(trained_path))
 
+class build_swin_transformer(nn.Module):
+    def __init__(self, num_classes, camera_num, view_num, cfg, factory):
+        super(build_swin_transformer, self).__init__()
+        last_stride = cfg.MODEL.LAST_STRIDE
+        model_path = cfg.MODEL.PRETRAIN_PATH
+        model_name = cfg.MODEL.NAME
+        pretrain_choice = cfg.MODEL.PRETRAIN_CHOICE
+        self.cos_layer = cfg.MODEL.COS_LAYER
+        self.neck = cfg.MODEL.NECK
+        self.neck_feat = cfg.TEST.NECK_FEAT
+        self.in_planes = 1000
 
+        print('using Transformer_type: {} as a backbone'.format(cfg.MODEL.TRANSFORMER_TYPE))
+
+        if cfg.MODEL.SIE_CAMERA:
+            camera_num = camera_num
+        else:
+            camera_num = 0
+        if cfg.MODEL.SIE_VIEW:
+            view_num = view_num
+        else:
+            view_num = 0
+
+        #TODO: own method
+        self.base = SwinTransformer(
+                img_size=cfg.INPUT.SIZE_TRAIN[0],
+                patch_size=cfg.MODEL.SWIN_TRANSFORMER_PATCH_SIZE,
+                embed_dim=cfg.MODEL.SWIN_TRANSFORMER_EMBED_DIM,
+                depths=cfg.MODEL.SWIN_TRANSFORMER_DEPTHS,
+                num_heads=cfg.MODEL.SWIN_TRANSFORMER_NUM_HEADS,
+                window_size=cfg.MODEL.SWIN_TRANSFORMER_WINDOW_SIZE,
+                drop_path_rate=cfg.MODEL.SWIN_TRANSFORMER_DROP_PATH_RATE,
+                drop_rate=cfg.MODEL.SWIN_TRANSFORMER_DROP_RATE,
+                attn_drop_rate=cfg.MODEL.SWIN_TRANSFORMER_ATTN_DROP_RATE,
+            )
+
+        if pretrain_choice == 'imagenet':
+            self.base.load_param(model_path)
+            print('Loading pretrained ImageNet model......from {}'.format(model_path))
+        elif pretrain_choice == 'self':
+            param_dict = torch.load(model_path, map_location='cpu')
+            for i in param_dict:
+                if 'classifier' in i:
+                    continue
+                self.state_dict()[i].copy_(param_dict[i])
+            print('Loading finetune model......from {}'.format(model_path))
+
+        self.gap = nn.AdaptiveAvgPool2d(1)
+        self.num_classes = num_classes
+
+        #TODO: classifier ?
+        self.classifier = nn.Linear(self.in_planes, self.num_classes, bias=False)
+        self.classifier.apply(weights_init_classifier)
+
+        self.bottleneck = nn.BatchNorm1d(self.in_planes)
+        self.bottleneck.bias.requires_grad_(False)
+        self.bottleneck.apply(weights_init_kaiming)
+
+    def forward(self, x, label=None, cam_label= None, view_label=None):
+        global_feat = self.base(x, cam_label=cam_label, view_label=view_label)
+
+        feat = self.bottleneck(global_feat)
+
+        if self.training:
+            cls_score = self.classifier(feat)
+            return cls_score, global_feat  # global feature for triplet loss
+        else:
+            if self.neck_feat == 'after':
+                # print("Test with feature after BN")
+                return feat
+            else:
+                # print("Test with feature before BN")
+                return global_feat
+
+    def load_param(self, trained_path):
+        param_dict = torch.load(trained_path)
+        for i in param_dict:
+            self.state_dict()[i.replace('module.', '')].copy_(param_dict[i])
+        print('Loading pretrained model from {}'.format(trained_path))
+
+    def load_param_finetune(self, model_path):
+        param_dict = torch.load(model_path)
+        for i in param_dict:
+            self.state_dict()[i].copy_(param_dict[i])
+        print('Loading pretrained model for finetuning from {}'.format(model_path))
 
 class build_transformer(nn.Module):
     def __init__(self, num_classes, camera_num, view_num, cfg, factory):
@@ -293,6 +378,9 @@ def make_model(cfg, num_class, camera_num=0, view_num=0):
     if cfg.MODEL.NAME == 'transformer':
         model = build_transformer(num_class, camera_num, view_num, cfg, __factory_hh)
         print('===========building transformer===========')
+    elif cfg.MODEL.NAME == 'swin_transformer':
+        model = build_swin_transformer(num_class, camera_num, view_num, cfg, __factory_hh)
+        print('===========building Swin tranformer===========')
     else:
         print('===========ResNet===========')
         model = Backbone(num_class, cfg)
