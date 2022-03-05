@@ -200,7 +200,7 @@ class build_swin_transformer(nn.Module):
         self.neck_feat = cfg.TEST.NECK_FEAT
         self.in_planes = 1000
 
-        print('using Transformer_type: {} as a backbone'.format(cfg.MODEL.TRANSFORMER_TYPE))
+        print('using Transformer_type: {} as a backbone'.format(cfg.MODEL.Transformer_TYPE))
 
         if cfg.MODEL.SIE_CAMERA:
             camera_num = camera_num
