@@ -107,7 +107,7 @@ _C.DATASETS = CN()
 # List of the dataset names for training, as present in paths_catalog.py
 _C.DATASETS.NAMES = ('market1501')
 # Root directory where datasets should be used (and downloaded if not found)
-_C.DATASETS.ROOT_DIR = ('/home/michuan.lh/datasets')
+_C.DATASETS.ROOT_DIR = ('/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT/datasets')
 _C.DATASETS.PLUS_NUM_ID = 100
 _C.DATASETS.QUERY_MINING = False
 # -----------------------------------------------------------------------------
