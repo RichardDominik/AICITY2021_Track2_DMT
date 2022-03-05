@@ -6,6 +6,7 @@ import xml.dom.minidom as XD
 import os.path as osp
 from .bases import BaseImageDataset
 import os
+import xml.etree.ElementTree as ET
 
 class AIC_SIM(BaseImageDataset):
     dataset_dir = 'AIC21/AIC21_Track2_ReID'
