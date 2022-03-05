@@ -69,3 +69,11 @@ python train_stage2_v2.py --config_file configs/stage2/transreid_256.yml MODEL.D
 python test.py --config_file configs/stage2/transreid_256.yml MODEL.DEVICE_ID "('7')" TEST.WEIGHT './logs/stage2/transreid_256/v1/transformer_2.pth' OUTPUT_DIR './logs/stage2/transreid_256/v1'
 python test.py --config_file configs/stage2/transreid_256.yml MODEL.DEVICE_ID "('7')" TEST.WEIGHT './logs/stage2/transreid_256/v2/transformer_2.pth' OUTPUT_DIR './logs/stage2/transreid_256/v2'
 
+# Swin transformer
+python train.py --config_file configs/stage1/swin.yml MODEL.DEVICE_ID "('0')"
+python train_stage2_v1.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('7')" OUTPUT_DIR './logs/stage2/swin_transformer/v1'
+python train_stage2_v2.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('7')" OUTPUT_DIR './logs/stage2/swin_transformer/v2'
+
+python test.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('7')" TEST.WEIGHT './logs/stage2/swin_transformer/v1/swin_transformer_2.pth' OUTPUT_DIR './logs/stage2/swin_transformer/v1'
+python test.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('7')" TEST.WEIGHT './logs/stage2/swin_transformer/v2/swin_transformer_2.pth' OUTPUT_DIR './logs/stage2/swin_transformer/v2'
+
