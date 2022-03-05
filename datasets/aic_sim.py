@@ -6,7 +6,6 @@ import xml.dom.minidom as XD
 import os.path as osp
 from .bases import BaseImageDataset
 import os
-import xml.etree.ElementTree as ET
 
 class AIC_SIM(BaseImageDataset):
     dataset_dir = 'AIC21/AIC21_Track2_ReID'
@@ -61,7 +60,7 @@ class AIC_SIM(BaseImageDataset):
 
     def _process_dir(self, dir_path, relabel=False, if_track=False):
         xml_dir = osp.join(self.dataset_dir, 'train_label.xml')
-        info = XD.parse(xml_dir, parser=ET.XMLParser(encoding='gb2312')).documentElement.getElementsByTagName('Item')
+        info = XD.parse(xml_dir).documentElement.getElementsByTagName('Item')
 
         pid_container = set()
         for element in range(len(info)):
