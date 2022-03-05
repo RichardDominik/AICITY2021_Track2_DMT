@@ -111,4 +111,4 @@ class AIC(BaseImageDataset):
 
 
 if __name__ == '__main__':
-    aic = AIC(root='/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT')
+    aic = AIC(root='/home/d/dominik3/diplomovka/dataset')
