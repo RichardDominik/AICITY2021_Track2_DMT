@@ -266,10 +266,20 @@ class build_swin_transformer(nn.Module):
                 return global_feat
 
     def load_param(self, trained_path):
-        param_dict = torch.load(trained_path)
+        param_dict = torch.load(trained_path,map_location='cpu')
         for i in param_dict:
+            if 'classifier' in i or 'arcface' in i or 'gap' in i:
+                continue
+           # self.state_dict()[i].copy_(param_dict[i])
             self.state_dict()[i.replace('module.', '')].copy_(param_dict[i])
         print('Loading pretrained model from {}'.format(trained_path))
+
+
+    # def load_param(self, trained_path):
+    #     param_dict = torch.load(trained_path)
+    #     for i in param_dict:
+    #         self.state_dict()[i.replace('module.', '')].copy_(param_dict[i])
+    #     print('Loading pretrained model from {}'.format(trained_path))
 
     def load_param_finetune(self, model_path):
         param_dict = torch.load(model_path)
