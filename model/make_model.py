@@ -229,13 +229,6 @@ class build_swin_transformer(nn.Module):
         if pretrain_choice == 'imagenet':
             self.base.load_param(model_path)
             print('Loading pretrained ImageNet model......from {}'.format(model_path))
-        elif pretrain_choice == 'self':
-            param_dict = torch.load(model_path, map_location='cpu')
-            for i in param_dict:
-                if 'classifier' in i:
-                    continue
-                self.state_dict()[i].copy_(param_dict[i])
-            print('Loading finetune model......from {}'.format(model_path))
 
         self.gap = nn.AdaptiveAvgPool2d(1)
         self.num_classes = num_classes
@@ -247,6 +240,14 @@ class build_swin_transformer(nn.Module):
         self.bottleneck = nn.BatchNorm1d(self.in_planes)
         self.bottleneck.bias.requires_grad_(False)
         self.bottleneck.apply(weights_init_kaiming)
+
+        if pretrain_choice == 'self':
+            param_dict = torch.load(model_path, map_location='cpu')
+            for i in param_dict:
+                if 'classifier' in i:
+                    continue
+                self.state_dict()[i].copy_(param_dict[i])
+            print('Loading finetune model......from {}'.format(model_path))
 
     def forward(self, x, label=None, cam_label= None, view_label=None):
         global_feat = self.base(x, cam_label=cam_label, view_label=view_label)
