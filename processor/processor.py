@@ -210,6 +210,11 @@ def do_inference(cfg,
                 feat = model(img)
             evaluator.update((feat.clone(), pid, camid, trackid))
             img_path_list.extend(imgpath)
-    _, _, distmat, pids, camids, qf, gf = evaluator.compute(fic=cfg.TEST.FIC, fac=cfg.TEST.FAC, rm_camera=cfg.TEST.RM_CAMERA,save_dir=cfg.OUTPUT_DIR, crop_test = cfg.TEST.CROP_TEST, la= cfg.TEST.LA)
+    cmc, mAP, distmat, pids, camids, qf, gf = evaluator.compute(fic=cfg.TEST.FIC, fac=cfg.TEST.FAC, rm_camera=cfg.TEST.RM_CAMERA,save_dir=cfg.OUTPUT_DIR, crop_test = cfg.TEST.CROP_TEST, la= cfg.TEST.LA)
     np.save(os.path.join(cfg.OUTPUT_DIR, cfg.TEST.DIST_MAT) , distmat)
     print('writing result to {}'.format(cfg.OUTPUT_DIR))
+
+    logger.info("Validation Results ")
+    logger.info("mAP: {:.1%}".format(mAP))
+    for r in [1, 5, 10]:
+        logger.info("CMC curve, Rank-{:<3}:{:.1%}".format(r, cmc[r - 1]))
