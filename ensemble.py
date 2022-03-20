@@ -2,8 +2,8 @@ import numpy as np
 import os
 
 distmat_paths = [
-#        './logs/stage2/resnext101a_384/v1/dist_mat.npy',
-#        './logs/stage2/resnext101a_384/v2/dist_mat.npy',
+        './logs/stage2/resnext101a_384/v1/dist_mat.npy',
+        './logs/stage2/resnext101a_384/v2/dist_mat.npy',
 #
 #        './logs/stage2/101a_384/v1/dist_mat.npy',
 #        './logs/stage2/101a_384/v2/dist_mat.npy',
@@ -26,8 +26,8 @@ distmat_paths = [
 #        './logs/stage2/transreid_256/v1/dist_mat.npy',
 #        './logs/stage2/transreid_256/v2/dist_mat.npy',
 
-	'./logs/stage2/swin_transformer/v1/dist_mat.npy',
-	'./logs/stage2/swin_transformer/v1/dist_mat.npy',
+#	'./logs/stage2/swin_transformer/v1/dist_mat.npy',
+#	'./logs/stage2/swin_transformer/v1/dist_mat.npy',
         ]
 
 distmat = np.zeros((1103,31238))
