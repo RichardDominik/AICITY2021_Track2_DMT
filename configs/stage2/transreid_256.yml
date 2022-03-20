@@ -1,6 +1,6 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: './logs/stage1/transreid_256/transformer_40.pth'
+  PRETRAIN_PATH: './logs/stage2/transreid_256/v1/transformer_2.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'

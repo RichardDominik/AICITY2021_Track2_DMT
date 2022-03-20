@@ -1,6 +1,6 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: './logs/stage1/s101_384/resnest101_80.pth'
+  PRETRAIN_PATH:  './logs/stage2/s101_384/v1/resnest101_2.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
