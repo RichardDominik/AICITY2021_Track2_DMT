@@ -30,11 +30,17 @@ distmat_paths = [
 	    './logs/stage2/swin_transformer/v2/dist_mat.npy',
         ]
 
+# method 1
 distmat = np.zeros((1103,31238))
 for i in distmat_paths:
-    distmat += (np.load(i) ** 2)
+    distmat += np.load(i)
 
-distmat = np.sqrt(distmat)
+# method 2
+# distmat = np.zeros((1103,31238))
+# for i in distmat_paths:
+#     distmat += (np.load(i) ** 2)
+#
+# distmat = np.sqrt(distmat)
 
 sort_distmat_index = np.argsort(distmat, axis=1)
 print(sort_distmat_index)
