@@ -20,15 +20,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configs/stage1/swin_recrop.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="17" lean-forward="true" selection-end-line="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/configs/stage1/101a_384_recrop.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="395">
@@ -41,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/configs/stage1/101a_384_spgan.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="107">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -50,16 +41,7 @@
         <entry file="file://$PROJECT_DIR$/configs/stage2/101a_384_recrop.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
-              <caret line="24" lean-forward="true" selection-end-line="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configs/stage2/101a_384_spgan.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="11" lean-forward="true" selection-end-line="60" />
+              <caret line="24" selection-end-line="60" />
             </state>
           </provider>
         </entry>
@@ -73,15 +55,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/configs/stage2/swin_spgan.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="2" column="54" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/configs/stage1/swin_spgan.yml">
           <provider selected="true" editor-type-id="text-editor">
@@ -91,11 +64,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configs/stage1/101a_384.yml">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ensemble.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="60">
+              <caret line="4" column="6" lean-forward="true" selection-start-line="4" selection-start-column="6" selection-end-line="26" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" selection-start-line="7" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/metrics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -148,13 +142,14 @@
         <option value="$PROJECT_DIR$/configs/stage2/densenet169a_384.yml" />
         <option value="$PROJECT_DIR$/configs/stage2/101a_384.yml" />
         <option value="$PROJECT_DIR$/configs/stage2/swin.yml" />
-        <option value="$PROJECT_DIR$/ensemble.py" />
         <option value="$PROJECT_DIR$/configs/stage1/swin.yml" />
         <option value="$PROJECT_DIR$/configs/stage1/swin_recrop.yml" />
         <option value="$PROJECT_DIR$/datasets/make_dataloader.py" />
         <option value="$PROJECT_DIR$/configs/stage1/swin_spgan.yml" />
         <option value="$PROJECT_DIR$/configs/stage2/swin_recrop.yml" />
         <option value="$PROJECT_DIR$/configs/stage2/swin_spgan.yml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/ensemble.py" />
       </list>
     </option>
   </component>
@@ -173,28 +168,6 @@
             <path>
               <item name="AICITY2021_Track2_DMT" type="b2602c69:ProjectViewProjectNode" />
               <item name="AICITY2021_Track2_DMT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AICITY2021_Track2_DMT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AICITY2021_Track2_DMT" type="462c0819:PsiDirectoryNode" />
-              <item name="configs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AICITY2021_Track2_DMT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AICITY2021_Track2_DMT" type="462c0819:PsiDirectoryNode" />
-              <item name="configs" type="462c0819:PsiDirectoryNode" />
-              <item name="stage1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AICITY2021_Track2_DMT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AICITY2021_Track2_DMT" type="462c0819:PsiDirectoryNode" />
-              <item name="configs" type="462c0819:PsiDirectoryNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AICITY2021_Track2_DMT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AICITY2021_Track2_DMT" type="462c0819:PsiDirectoryNode" />
-              <item name="processor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AICITY2021_Track2_DMT" type="b2602c69:ProjectViewProjectNode" />
@@ -251,13 +224,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9791000" />
+    <option name="totallyTimeSpent" value="11482000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="826" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.35204083" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19742489" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -271,7 +244,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32891566" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.4361446" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -358,13 +331,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/metrics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2100">
-          <caret line="148" column="61" selection-start-line="148" selection-start-column="57" selection-end-line="148" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/make_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -438,16 +404,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ensemble.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="18" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configs/stage1/s101_384.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -501,7 +457,7 @@
     <entry file="file://$PROJECT_DIR$/configs/stage1/101a_384_spgan.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="107">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
@@ -522,7 +478,7 @@
     <entry file="file://$PROJECT_DIR$/configs/stage2/101a_384_recrop.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
-          <caret line="24" lean-forward="true" selection-end-line="60" />
+          <caret line="24" selection-end-line="60" />
         </state>
       </provider>
     </entry>
@@ -544,6 +500,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29">
           <caret line="2" column="54" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/metrics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="7" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ensemble.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="6" lean-forward="true" selection-start-line="4" selection-start-column="6" selection-end-line="26" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
