@@ -213,7 +213,6 @@ class build_swin_transformer(nn.Module):
         else:
             view_num = 0
 
-        #TODO: own method
         self.base = SwinTransformer(
                 img_size=cfg.INPUT.SIZE_TRAIN[0],
                 patch_size=cfg.MODEL.SWIN_TRANSFORMER_PATCH_SIZE,
@@ -233,9 +232,30 @@ class build_swin_transformer(nn.Module):
         self.gap = nn.AdaptiveAvgPool2d(1)
         self.num_classes = num_classes
 
-        #TODO: classifier ?
-        self.classifier = nn.Linear(self.in_planes, self.num_classes, bias=False)
-        self.classifier.apply(weights_init_classifier)
+        self.ID_LOSS_TYPE = cfg.MODEL.ID_LOSS_TYPE
+        if self.ID_LOSS_TYPE == 'arcface':
+            print('using {} with s:{}, m: {}'.format(self.ID_LOSS_TYPE, cfg.SOLVER.COSINE_SCALE,
+                                                     cfg.SOLVER.COSINE_MARGIN))
+            self.classifier = Arcface(self.in_planes, self.num_classes,
+                                      s=cfg.SOLVER.COSINE_SCALE, m=cfg.SOLVER.COSINE_MARGIN)
+        elif self.ID_LOSS_TYPE == 'cosface':
+            print('using {} with s:{}, m: {}'.format(self.ID_LOSS_TYPE, cfg.SOLVER.COSINE_SCALE,
+                                                     cfg.SOLVER.COSINE_MARGIN))
+            self.classifier = Cosface(self.in_planes, self.num_classes,
+                                      s=cfg.SOLVER.COSINE_SCALE, m=cfg.SOLVER.COSINE_MARGIN)
+        elif self.ID_LOSS_TYPE == 'amsoftmax':
+            print('using {} with s:{}, m: {}'.format(self.ID_LOSS_TYPE, cfg.SOLVER.COSINE_SCALE,
+                                                     cfg.SOLVER.COSINE_MARGIN))
+            self.classifier = AMSoftmax(self.in_planes, self.num_classes,
+                                        s=cfg.SOLVER.COSINE_SCALE, m=cfg.SOLVER.COSINE_MARGIN)
+        elif self.ID_LOSS_TYPE == 'circle':
+            print('using {} with s:{}, m: {}'.format(self.ID_LOSS_TYPE, cfg.SOLVER.COSINE_SCALE,
+                                                     cfg.SOLVER.COSINE_MARGIN))
+            self.classifier = CircleLoss(self.in_planes, self.num_classes,
+                                         s=cfg.SOLVER.COSINE_SCALE, m=cfg.SOLVER.COSINE_MARGIN)
+        else:
+            self.classifier = nn.Linear(self.in_planes, self.num_classes, bias=False)
+            self.classifier.apply(weights_init_classifier)
 
         self.bottleneck = nn.BatchNorm1d(self.in_planes)
         self.bottleneck.bias.requires_grad_(False)
@@ -255,7 +275,11 @@ class build_swin_transformer(nn.Module):
         feat = self.bottleneck(global_feat)
 
         if self.training:
-            cls_score = self.classifier(feat)
+            if self.ID_LOSS_TYPE in ('arcface', 'cosface', 'amsoftmax', 'circle'):
+                cls_score = self.classifier(feat, label)
+            else:
+                cls_score = self.classifier(feat)
+
             return cls_score, global_feat  # global feature for triplet loss
         else:
             if self.neck_feat == 'after':
