@@ -1,6 +1,7 @@
 MODEL:
-  PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: './pretrained/swin_base_patch4_window7_224_22kto1k.pth'
+  PRETRAIN_CHOICE: 'self'
+#  TODO: zmenit
+  PRETRAIN_PATH: './logs/stage1/swin_transformer/swin_transformer_20.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
@@ -20,8 +21,7 @@ INPUT:
   PIXEL_STD: [0.5, 0.5, 0.5]
 
 DATASETS:
-  NAMES: ('aic_sim')
-  PLUS_NUM_ID: 100
+  NAMES: ('aic')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
@@ -30,30 +30,36 @@ DATALOADER:
 
 SOLVER:
   OPTIMIZER_NAME: 'SGD'
-  MAX_EPOCHS: 40
-  BASE_LR: 0.01
+  MAX_EPOCHS: 3
+  BASE_LR: 0.0004
   IMS_PER_BATCH: 16
-  STEPS: [20, 35]
-  GAMMA: 0.
+  STEPS: [40, 70]
+  GAMMA: 0.1
   WARMUP_FACTOR: 0.01
-  WARMUP_EPOCHS: 5
-  WARMUP_METHOD: 'cosine'
-  LARGE_FC_LR: False
-  CHECKPOINT_PERIOD: 4
+  WARMUP_EPOCHS: 10
+  WARMUP_METHOD: 'linear'
+  LARGE_FC_LR: True
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 3
   LOG_PERIOD: 50
   EVAL_PERIOD: 10000
-  WEIGHT_DECAY:  1e-4
-  WEIGHT_DECAY_BIAS: 1e-4
-  BIAS_LR_FACTOR: 2
   FP16_ENABLED: True
 
 TEST:
   IMS_PER_BATCH: 16
-  RE_RANKING: False
+  RE_RANKING: True
   RE_RANKING_TRACK: True
+  WEIGHT: './logs/stage2/swin_transformer_384/v1/swin_transformer_2.pth'
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
-  FLIP_FEATS: 'on'
+  FLIP_FEATS: 'no'
   EVAL: True
   FIC: True
-OUTPUT_DIR: './logs/stage1/swin_transformer/swin_transformer_224'
+  CROP_TEST: True
+  LA: 0.11
+
+STAGE2:
+  EPS: 0.55
+  LA: 0.0005
+      
+OUTPUT_DIR: './logs/stage2/swin_transformer_384/v1'
