@@ -202,6 +202,7 @@ if __name__ == '__main__':
     val_loader, num_query, testset = get_testloader_uda(cfg)
     aug_loader, num_query, _ = get_testloader_uda(cfg, aug=True)
 
+
     num_classes = 1500
     model = make_model(cfg, num_class=num_classes)
     initial_weights = torch.load(cfg.MODEL.PRETRAIN_PATH, map_location='cpu')

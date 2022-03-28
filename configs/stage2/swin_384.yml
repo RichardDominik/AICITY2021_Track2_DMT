@@ -1,19 +1,20 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
 #  TODO: zmenit
-  PRETRAIN_PATH: './logs/stage1/swin_transformer/swin_transformer_20.pth'
+  PRETRAIN_PATH: './logs/stage1/swin_transformer/swin_transformer_40.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
   NAME: 'swin_transformer'
   NO_MARGIN: True
   DEVICE_ID: ('0')
-  Transformer_TYPE: 'swin_base_patch4_window7_224'
+  Transformer_TYPE: 'swin_base_patch4_window12_384_22kto1k'
   STRIDE_SIZE: [12, 12]
+  SWIN_TRANSFORMER_WINDOW_SIZE: 12
 
 INPUT:
-  SIZE_TRAIN: [224, 224]
-  SIZE_TEST: [224, 224]
+  SIZE_TRAIN: [384, 384]
+  SIZE_TEST: [384, 384]
   PROB: 0.5 # random horizontal flip
   RE_PROB: 0.5 # random erasing
   PADDING: 10
@@ -32,7 +33,7 @@ SOLVER:
   OPTIMIZER_NAME: 'SGD'
   MAX_EPOCHS: 3
   BASE_LR: 0.0004
-  IMS_PER_BATCH: 16
+  IMS_PER_BATCH: 8
   STEPS: [40, 70]
   GAMMA: 0.1
   WARMUP_FACTOR: 0.01
@@ -46,7 +47,7 @@ SOLVER:
   FP16_ENABLED: True
 
 TEST:
-  IMS_PER_BATCH: 16
+  IMS_PER_BATCH: 8
   RE_RANKING: True
   RE_RANKING_TRACK: True
   WEIGHT: './logs/stage2/swin_transformer_384/v1/swin_transformer_2.pth'
