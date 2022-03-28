@@ -32,8 +32,8 @@ distmat_paths = [
         # './logs/stage2/swin_transformer_spgan/v1/dist_mat.npy',
         # './logs/stage2/swin_transformer_spgan/v2/dist_mat.npy',
 
-        './logs/stage2/swin_transformer_384/v1/pth11/dist_mat.npy',
-        './logs/stage2/swin_transformer_384/v2/pth11/dist_mat.npy',
+        './logs/stage2/swin_transformer_384/v1/pth29/dist_mat.npy',
+        './logs/stage2/swin_transformer_384/v2/pth29/dist_mat.npy',
         ]
 
 # method 1
