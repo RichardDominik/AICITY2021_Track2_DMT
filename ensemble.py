@@ -26,11 +26,14 @@ distmat_paths = [
         './logs/stage2/transreid_256/v1/dist_mat.npy',
         './logs/stage2/transreid_256/v2/dist_mat.npy',
 
-	    './logs/stage2/swin_transformer/v1/dist_mat.npy',
-	    './logs/stage2/swin_transformer/v2/dist_mat.npy',
+	    # './logs/stage2/swin_transformer/v1/dist_mat.npy',
+	    # './logs/stage2/swin_transformer/v2/dist_mat.npy',
+        #
+        # './logs/stage2/swin_transformer_spgan/v1/dist_mat.npy',
+        # './logs/stage2/swin_transformer_spgan/v2/dist_mat.npy',
 
-        './logs/stage2/swin_transformer_spgan/v1/dist_mat.npy',
-        './logs/stage2/swin_transformer_spgan/v2/dist_mat.npy',
+        './logs/stage2/swin_transformer_384/v1/dist_mat.npy',
+        './logs/stage2/swin_transformer_384/v2/dist_mat.npy',
         ]
 
 # method 1
