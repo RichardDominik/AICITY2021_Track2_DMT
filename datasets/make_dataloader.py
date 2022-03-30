@@ -36,9 +36,6 @@ def val_collate_fn(batch):   ##### revised by luo
 
 
 def make_dataloader(cfg, feat_extraction=False):
-    if feat_extraction:
-        train_collate_fn = val_collate_fn
-
     if cfg.INPUT.RESIZECROP == True:
         randomcrop = T.RandomResizedCrop(cfg.INPUT.SIZE_TRAIN,scale=(0.75,1.0), ratio=(0.75,1.3333), interpolation=3)
     else:
@@ -80,20 +77,20 @@ def make_dataloader(cfg, feat_extraction=False):
                 train_set,
                 num_workers=num_workers,
                 batch_sampler=batch_sampler,
-                collate_fn=train_collate_fn,
+                collate_fn=train_collate_fn if not feat_extraction else val_collate_fn,
                 pin_memory=True,
             )
         else:
             train_loader = DataLoader(
                 train_set, batch_size=cfg.SOLVER.IMS_PER_BATCH,
                 sampler=RandomIdentitySampler(dataset.train, cfg.SOLVER.IMS_PER_BATCH, cfg.DATALOADER.NUM_INSTANCE),
-                num_workers=num_workers, collate_fn=train_collate_fn
+                num_workers=num_workers, collate_fn=train_collate_fn if not feat_extraction else val_collate_fn
             )
     elif cfg.DATALOADER.SAMPLER == 'softmax':
         print('using softmax sampler')
         train_loader = DataLoader(
             train_set, batch_size=cfg.SOLVER.IMS_PER_BATCH, shuffle=True, num_workers=num_workers,
-            collate_fn=train_collate_fn
+            collate_fn=train_collate_fn if not feat_extraction else val_collate_fn
         )
     else:
         print('unsupported sampler! expected softmax or triplet but got {}'.format(cfg.SAMPLER))
