@@ -4,7 +4,6 @@ MODEL:
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
   NAME: 'lftd'
-  LFTD_OUT_DIM: 512
   NO_MARGIN: True
   DEVICE_ID: ('6')
 
