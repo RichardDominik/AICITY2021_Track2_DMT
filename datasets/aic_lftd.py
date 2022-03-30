@@ -90,4 +90,4 @@ class AICLFTD(BaseImageDataset):
 
 
 if __name__ == '__main__':
-    aic = AICLFTD(root='/home/k/kocur15/code/AICITY2021_Track2_DMT')
+    aic = AICLFTD(root='/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT')
