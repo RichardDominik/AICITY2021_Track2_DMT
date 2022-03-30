@@ -101,8 +101,8 @@ class Backbone(nn.Module):
             self.base = resnext101_ibn_a()
             print('using resnext101_ibn_a as a backbone')
         elif model_name == 'ltfd':
-            self.base = LFTD(1000, cfg.MODEL.LFTD_OUT_DIM)
-            self.in_planes = cfg.MODEL.LFTD_OUT_DIM
+            self.base = LFTD(1000, 512)
+            self.in_planes = 512
         else:
             print('unsupported backbone! but got {}'.format(model_name))
 
