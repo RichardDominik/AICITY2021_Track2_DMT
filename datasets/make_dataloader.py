@@ -1,7 +1,7 @@
 import torch
 import torchvision.transforms as T
 from torch.utils.data import DataLoader, TensorDataset
-from .bases import ImageDataset
+from .bases import ImageDataset, LFTDDataset
 from .preprocessing import RandomErasing
 from .sampler import RandomIdentitySampler
 from .aic import AIC
@@ -65,7 +65,7 @@ def make_dataloader(cfg, feat_extraction=False):
 
     dataset = __factory[cfg.DATASETS.NAMES](root=cfg.DATASETS.ROOT_DIR,crop_test = cfg.TEST.CROP_TEST)
     if cfg.DATASETS.NAMES == 'aic_lftd':
-        train_set = TensorDataset(dataset.train)
+        train_set = LFTDDataset(dataset.train)
     else:
         train_set = ImageDataset(dataset.train, train_transforms)
     num_classes = dataset.num_train_pids
@@ -99,12 +99,12 @@ def make_dataloader(cfg, feat_extraction=False):
         print('unsupported sampler! expected softmax or triplet but got {}'.format(cfg.SAMPLER))
     if cfg.DATASETS.QUERY_MINING:
         if cfg.DATASETS.NAMES == 'aic_lftd':
-            val_set = TensorDataset(dataset.query + dataset.query)
+            val_set = LFTDDataset(dataset.query + dataset.query)
         else:
             val_set = ImageDataset(dataset.query + dataset.query, val_transforms)
     else:
         if cfg.DATASETS.NAMES == 'aic_lftd':
-            val_set = TensorDataset(dataset.query + dataset.gallery)
+            val_set = LFTDDataset(dataset.query + dataset.gallery)
         else:
             val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
     val_loader = DataLoader(
