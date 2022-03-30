@@ -8,7 +8,7 @@ import os.path as osp
 
 import numpy as np
 
-from .bases import BaseImageDataset
+from datasets.bases import BaseImageDataset
 
 class AICLFTD(BaseImageDataset):
     dataset_dir = 'AIC21/AIC21_Track2_ReID'
