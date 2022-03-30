@@ -2,6 +2,7 @@ import torch
 
 class LFTDModel(torch.nn.Module):
     def __init__(self, input_dim, output_dim):
+        super().__init__()
         self.lftd = LFTD(input_dim, output_dim)
 
     def forward(self, x):
