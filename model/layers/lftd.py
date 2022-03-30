@@ -1,5 +1,21 @@
 import torch
 
+class LFTDModel(torch.nn.Module):
+    def __init__(self, input_dim, output_dim):
+        self.lftd = LFTD(input_dim, output_dim)
+
+    def forward(self, x):
+        return self.lftd(x)
+
+    def load_param(self, model_path):
+        param_dict = torch.load(model_path, map_location='cpu')
+        if 'state_dict' in param_dict:
+            param_dict = param_dict['state_dict']
+        for i in param_dict:
+            if 'fc' in i:
+                continue
+            self.state_dict()[i.replace('module.','')].copy_(param_dict[i])
+
 class LFTD(torch.nn.Module):
     """
     Learning Features in Temporal Domain

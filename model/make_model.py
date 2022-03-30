@@ -8,7 +8,7 @@ from .backbones.resnext_ibn import resnext101_ibn_a
 from .backbones.vit_pytorch import vit_base_patch16_224_TransReID, vit_small_patch16_224_TransReID
 from .backbones.densenet_ibn import densenet169_ibn_a
 from .backbones.swin_transformer import SwinTransformer
-from .layers.lftd import LFTD
+from .layers.lftd import LFTD, LFTDModel
 from .layers.pooling import GeM, GeneralizedMeanPooling,GeneralizedMeanPoolingP
 import torch.nn.functional as F
 from loss.metric_learning import Arcface, Cosface, AMSoftmax, CircleLoss
@@ -101,7 +101,7 @@ class Backbone(nn.Module):
             self.base = resnext101_ibn_a()
             print('using resnext101_ibn_a as a backbone')
         elif model_name == 'lftd':
-            self.base = LFTD(1000, 512)
+            self.base = LFTDModel(1000, 512)
             self.in_planes = 512
         else:
             print('unsupported backbone! but got {}'.format(model_name))
