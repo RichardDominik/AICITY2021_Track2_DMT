@@ -17,7 +17,7 @@ INPUT:
 DATASETS:
   NAMES: ('aic_lftd')
   PLUS_NUM_ID: 100
-  ROOT_DIR: '/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT
+  ROOT_DIR: '/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT'
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
