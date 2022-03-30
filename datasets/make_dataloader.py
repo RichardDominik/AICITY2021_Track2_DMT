@@ -33,7 +33,10 @@ def val_collate_fn(batch):   ##### revised by luo
     return torch.stack(imgs, dim=0), pids, camids, trackids, img_paths
 
 
-def make_dataloader(cfg):
+def make_dataloader(cfg, feat_extraction=False):
+    if feat_extraction:
+        train_collate_fn = val_collate_fn
+
     if cfg.INPUT.RESIZECROP == True:
         randomcrop = T.RandomResizedCrop(cfg.INPUT.SIZE_TRAIN,scale=(0.75,1.0), ratio=(0.75,1.3333), interpolation=3)
     else:
