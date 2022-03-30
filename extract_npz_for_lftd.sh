@@ -1,15 +1,3 @@
-# Swin transformer 384 pth 29
-# python test.py --config_file configs/stage2/swin_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer_384/v1/swin_transformer_29.pth' OUTPUT_DIR './logs/stage2/swin_transformer_384/v1/pth29' > ./logs/swin_backbone_384_v2_pth29_test1.log
-# python test.py --config_file configs/stage2/swin_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer_384/v2/swin_transformer_29.pth' OUTPUT_DIR './logs/stage2/swin_transformer_384/v2/pth29' > ./logs/swin_backbone_384_v2_pth29_test2.log
-
-# Swin transformer 224
-python test.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer/v1/swin_transformer_2.pth' OUTPUT_DIR './logs/stage2/swin_transformer/v1' > ./logs/swin_backbone_224_npz_extract_v1.log
-python test.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer/v2/swin_transformer_2.pth' OUTPUT_DIR './logs/stage2/swin_transformer/v2' > ./logs/swin_backbone_224_npz_extract_v2.log
-
-# TransReID
-python test.py --config_file configs/stage2/transreid_256.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/transreid_256/v1/transformer_2.pth' OUTPUT_DIR './logs/stage2/transreid_256/v1' > ./logs/transreid_npz_extract_v1.log
-python test.py --config_file configs/stage2/transreid_256.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/transreid_256/v2/transformer_2.pth' OUTPUT_DIR './logs/stage2/transreid_256/v2' > ./logs/transreid_npz_extract_v2.log
-
 # SeResNet101-IBN-a
 python test.py --config_file configs/stage2/se_resnet101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/se_resnet101a_384/v1/se_resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/se_resnet101a_384/v1' > ./logs/se_resnet101a_384_npz_extract_v1.log
 python test.py --config_file configs/stage2/se_resnet101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/se_resnet101a_384/v2/se_resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/se_resnet101a_384/v2' > ./logs/se_resnet101a_384_npz_extract_v2.log
@@ -42,3 +30,15 @@ python test.py --config_file configs/stage2/densenet169a_384.yml MODEL.DEVICE_ID
 # ResNest101
 python test.py --config_file configs/stage2/s101_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/s101_384/v1/resnest101_2.pth' OUTPUT_DIR './logs/stage2/s101_384/v1' > ./logs/s101_384_npz_extract_v1.log
 python test.py --config_file configs/stage2/s101_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/s101_384/v2/resnest101_2.pth' OUTPUT_DIR './logs/stage2/s101_384/v2' > ./logs/s101_384_npz_extract_v2.log
+
+# Swin transformer 384 pth 29
+python test.py --config_file configs/stage2/swin_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer_384/v1/swin_transformer_29.pth' OUTPUT_DIR './logs/stage2/swin_transformer_384/v1/pth29' > ./logs/swin_backbone_384_v2_pth29_test1.log
+python test.py --config_file configs/stage2/swin_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer_384/v2/swin_transformer_29.pth' OUTPUT_DIR './logs/stage2/swin_transformer_384/v2/pth29' > ./logs/swin_backbone_384_v2_pth29_test2.log
+
+# Swin transformer 224
+python test.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer/v1/swin_transformer_2.pth' OUTPUT_DIR './logs/stage2/swin_transformer/v1' > ./logs/swin_backbone_224_npz_extract_v1.log
+python test.py --config_file configs/stage2/swin.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/swin_transformer/v2/swin_transformer_2.pth' OUTPUT_DIR './logs/stage2/swin_transformer/v2' > ./logs/swin_backbone_224_npz_extract_v2.log
+
+# TransReID
+python test.py --config_file configs/stage2/transreid_256.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/transreid_256/v1/transformer_2.pth' OUTPUT_DIR './logs/stage2/transreid_256/v1' > ./logs/transreid_npz_extract_v1.log
+python test.py --config_file configs/stage2/transreid_256.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/transreid_256/v2/transformer_2.pth' OUTPUT_DIR './logs/stage2/transreid_256/v2' > ./logs/transreid_npz_extract_v2.log
