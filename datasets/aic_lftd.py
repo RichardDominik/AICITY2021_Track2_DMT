@@ -10,11 +10,11 @@ import numpy as np
 
 from .bases import BaseImageDataset
 
-class AICLFTD(BaseImageDataset):
+class AIC_LFTD(BaseImageDataset):
     dataset_dir = 'AIC21/AIC21_Track2_ReID'
 
     def __init__(self, root='../data', verbose=True, crop_test=False, **kwargs):
-        super(AICLFTD, self).__init__()
+        super(AIC_LFTD, self).__init__()
         self.crop_test = crop_test
 
         feat_paths = [
@@ -113,4 +113,4 @@ class AICLFTD(BaseImageDataset):
 
 
 if __name__ == '__main__':
-    aic = AICLFTD(root='/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT')
+    aic = AIC_LFTD(root='/home/d/dominik3/diplomovka/AICITY2021_Track2_DMT')

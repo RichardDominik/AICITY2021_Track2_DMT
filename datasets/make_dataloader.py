@@ -1,10 +1,11 @@
 import torch
 import torchvision.transforms as T
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, TensorDataset
 from .bases import ImageDataset
 from .preprocessing import RandomErasing
 from .sampler import RandomIdentitySampler
 from .aic import AIC
+from .aic_lftd import AIC_LFTD
 from .aic_sim import AIC_SIM
 from .aic_sim_spgan import AIC_SIM_SPGAN
 from .sim_view import SIM_VIEW
@@ -16,6 +17,7 @@ __factory = {
     'aic_sim': AIC_SIM,
     'aic_sim_spgan': AIC_SIM_SPGAN,
     'sim_view': SIM_VIEW,
+    'aic_lftd': AIC_LFTD
 }
 
 def train_collate_fn(batch):
@@ -62,7 +64,10 @@ def make_dataloader(cfg, feat_extraction=False):
     num_workers = cfg.DATALOADER.NUM_WORKERS
 
     dataset = __factory[cfg.DATASETS.NAMES](root=cfg.DATASETS.ROOT_DIR,crop_test = cfg.TEST.CROP_TEST)
-    train_set = ImageDataset(dataset.train, train_transforms)
+    if cfg.DATASETS.NAMES == 'aic_lftd':
+        train_set = TensorDataset(dataset.train)
+    else:
+        train_set = ImageDataset(dataset.train, train_transforms)
     num_classes = dataset.num_train_pids
     if 'triplet' in cfg.DATALOADER.SAMPLER:
 
@@ -93,10 +98,15 @@ def make_dataloader(cfg, feat_extraction=False):
     else:
         print('unsupported sampler! expected softmax or triplet but got {}'.format(cfg.SAMPLER))
     if cfg.DATASETS.QUERY_MINING:
-
-        val_set = ImageDataset(dataset.query + dataset.query, val_transforms)
+        if cfg.DATASETS.NAMES == 'aic_lftd':
+            val_set = TensorDataset(dataset.query + dataset.query)
+        else:
+            val_set = ImageDataset(dataset.query + dataset.query, val_transforms)
     else:
-        val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
+        if cfg.DATASETS.NAMES == 'aic_lftd':
+            val_set = TensorDataset(dataset.query + dataset.gallery)
+        else:
+            val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
     val_loader = DataLoader(
         val_set, batch_size=cfg.TEST.IMS_PER_BATCH, shuffle=False, num_workers=num_workers,
         collate_fn=val_collate_fn

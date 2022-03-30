@@ -8,6 +8,7 @@ from .backbones.resnext_ibn import resnext101_ibn_a
 from .backbones.vit_pytorch import vit_base_patch16_224_TransReID, vit_small_patch16_224_TransReID
 from .backbones.densenet_ibn import densenet169_ibn_a
 from .backbones.swin_transformer import SwinTransformer
+from .layers.lftd import LFTD
 from .layers.pooling import GeM, GeneralizedMeanPooling,GeneralizedMeanPoolingP
 import torch.nn.functional as F
 from loss.metric_learning import Arcface, Cosface, AMSoftmax, CircleLoss
@@ -99,6 +100,9 @@ class Backbone(nn.Module):
             self.in_planes = 2048
             self.base = resnext101_ibn_a()
             print('using resnext101_ibn_a as a backbone')
+        elif model_name == 'ltfd':
+            self.base = LFTD(1000, cfg.MODEL.LFTD_OUT_DIM)
+            self.in_planes = cfg.MODEL.LFTD_OUT_DIM
         else:
             print('unsupported backbone! but got {}'.format(model_name))
 
@@ -155,8 +159,12 @@ class Backbone(nn.Module):
             x = self.base.extract_features(x)
         else:
             x = self.base(x)
-        global_feat = nn.functional.avg_pool2d(x, x.shape[2:4])
-        global_feat = global_feat.view(global_feat.shape[0], -1)  # flatten to (bs, 2048)
+
+        if self.model_name != 'lftd':
+            global_feat = x
+        else:
+            global_feat = nn.functional.avg_pool2d(x, x.shape[2:4])
+            global_feat = global_feat.view(global_feat.shape[0], -1)  # flatten to (bs, 2048)
 
         if self.neck == 'no':
             feat = global_feat
