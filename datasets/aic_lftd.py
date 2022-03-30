@@ -8,7 +8,7 @@ import os.path as osp
 
 import numpy as np
 
-from datasets.bases import BaseImageDataset
+from .bases import BaseImageDataset
 
 class AICLFTD(BaseImageDataset):
     dataset_dir = 'AIC21/AIC21_Track2_ReID'
@@ -33,8 +33,8 @@ class AICLFTD(BaseImageDataset):
 
         feat_paths = [os.path.join(root, feat_path) for feat_path in feat_paths]
 
-        train, query = self._process_npz(feat_paths, prefix='train', relabel=True)
-        gallery, _ = self._process_npz(feat_paths, prefix='val', relabel=False)
+        train = self._process_npz_train(feat_paths, relabel=True)
+        gallery, query = self._process_npz_test(feat_paths)
 
         if verbose:
             print("=> AIC loaded")
@@ -56,8 +56,8 @@ class AICLFTD(BaseImageDataset):
         pid2label = {pid: label for label, pid in enumerate(pid_container)}
         return pid2label
 
-    def _process_npz(self, feat_path_list, prefix='train', relabel=False):
-        first_npz_path = os.path.join(feat_path_list[0], prefix + '_out_arrays.npz')
+    def _process_npz_test(self, feat_path_list, relabel=False):
+        first_npz_path = os.path.join(feat_path_list[0], 'val_out_arrays.npz')
         data = np.load(first_npz_path)
 
         num_query = data['num_query']
@@ -73,7 +73,7 @@ class AICLFTD(BaseImageDataset):
         data_feats = np.empty([len(data_pids), len(feat_path_list), data['feats'].shape[-1]])
 
         for i, npz_path in enumerate(feat_path_list):
-            npz_full_path = os.path.join(feat_path_list[0], prefix + '_out_arrays.npz')
+            npz_full_path = os.path.join(feat_path_list[0], 'val_out_arrays.npz')
             data = np.load(npz_full_path)
 
             query_feats[:, i, :] = data['feats'][:num_query]
@@ -87,6 +87,29 @@ class AICLFTD(BaseImageDataset):
         query_dataset = [(f, pid, camid, tid) for f, pid, camid, tid in (zip(query_feats, query_pids, query_camids, query_tids)) if pid != -1]
 
         return dataset, query_dataset
+
+    def _process_npz_train(self, feat_path_list, relabel=False):
+        first_npz_path = os.path.join(feat_path_list[0], 'val_out_arrays.npz')
+        data = np.load(first_npz_path)
+
+        data_pids = data['pids']
+        data_camids = data['camids']
+        data_tids = data['tids']
+
+        data_feats = np.empty([len(data_pids), len(feat_path_list), data['feats'].shape[-1]])
+
+        for i, npz_path in enumerate(feat_path_list):
+            npz_full_path = os.path.join(feat_path_list[0], 'val_out_arrays.npz')
+            data = np.load(npz_full_path)
+            data_feats[:, i, :] = data['feats']
+
+        if relabel:
+            pid2label = self._relabel(data_pids)
+            dataset = [(f, pid2label[pid], camid, tid) for f, pid, camid, tid in (zip(data_feats, data_pids, data_camids, data_tids)) if pid != -1]
+        else:
+            dataset = [(f, pid, camid, tid) for f, pid, camid, tid in (zip(data_feats, data_pids, data_camids, data_tids)) if pid != -1]
+
+        return dataset
 
 
 if __name__ == '__main__':
