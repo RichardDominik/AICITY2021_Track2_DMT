@@ -18,18 +18,20 @@ class AICLFTD(BaseImageDataset):
         self.crop_test = crop_test
 
         feat_paths = [
-            './logs/stage2/resnext101a_384/v1/', './logs/stage2/resnext101a_384/v2/',
-            './logs/stage2/101a_384/v1/', './logs/stage2/101a_384/v2/',
-            './logs/stage2/101a_384_recrop/v1/', './logs/stage2/101a_384_recrop/v2/',
-            './logs/stage2/101a_384_spgan/v1/', './logs/stage2/101a_384_spgan/v2/',
-            './logs/stage2/densenet169a_384/v1/', './logs/stage2/densenet169a_384/v2/',
-            './logs/stage2/s101_384/v1/', './logs/stage2/s101_384/v2/',
-            './logs/stage2/se_resnet101a_384/v1/', './logs/stage2/se_resnet101a_384/v2/',
-            './logs/stage2/transreid_256/v1/', './logs/stage2/transreid_256/v2/',
+            'logs/stage2/resnext101a_384/v1/', 'logs/stage2/resnext101a_384/v2/',
+            'logs/stage2/101a_384/v1/', 'logs/stage2/101a_384/v2/',
+            'logs/stage2/101a_384_recrop/v1/', 'logs/stage2/101a_384_recrop/v2/',
+            'logs/stage2/101a_384_spgan/v1/', 'logs/stage2/101a_384_spgan/v2/',
+            'logs/stage2/densenet169a_384/v1/', 'logs/stage2/densenet169a_384/v2/',
+            'logs/stage2/s101_384/v1/', 'logs/stage2/s101_384/v2/',
+            'logs/stage2/se_resnet101a_384/v1/', 'logs/stage2/se_resnet101a_384/v2/',
+            'logs/stage2/transreid_256/v1/', 'logs/stage2/transreid_256/v2/',
             # './logs/stage2/swin_transformer/v1/', './logs/stage2/swin_transformer/v2/',
             # './logs/stage2/swin_transformer_spgan/v1/', './logs/stage2/swin_transformer_spgan/v2/',
-            './logs/stage2/swin_transformer_384/v1/pth29/', './logs/stage2/swin_transformer_384/v2/pth29/'
+            'logs/stage2/swin_transformer_384/v1/pth29/', 'logs/stage2/swin_transformer_384/v2/pth29/'
         ]
+
+        feat_paths = [os.path.join(root, feat_path) for feat_path in feat_paths]
 
         train, query = self._process_npz(feat_paths, prefix='train', relabel=True)
         gallery, _ = self._process_npz(feat_paths, prefix='val', relabel=False)
@@ -88,4 +90,4 @@ class AICLFTD(BaseImageDataset):
 
 
 if __name__ == '__main__':
-    aic = AICLFTD(root='/home/d/dominik3/diplomovka/dataset')
+    aic = AICLFTD(root='/home/k/kocur15/code/AICITY2021_Track2_DMT')
