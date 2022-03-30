@@ -219,5 +219,5 @@ class R1_mAP_eval():
         #  print('writing result to {}'.format(os.path.join(save_dir, 'track2.txt')))
 
         #  np.save(os.path.join(save_dir, 'origin_track_dist.npy'), origin_track_dist)
-        return cmc, mAP, distmat, self.pids, self.camids, qf, gf
+        return cmc, mAP, distmat, self.pids, self.camids, qf, gf, g_tids
 
