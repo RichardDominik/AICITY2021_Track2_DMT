@@ -219,5 +219,19 @@ class R1_mAP_eval():
         #  print('writing result to {}'.format(os.path.join(save_dir, 'track2.txt')))
 
         #  np.save(os.path.join(save_dir, 'origin_track_dist.npy'), origin_track_dist)
-        return cmc, mAP, distmat, self.pids, self.camids, qf, gf, g_tids
+        return cmc, mAP, distmat, self.pids, self.camids, qf, gf
+
+    def out_attribs(self, crop_test = False):
+        feats = torch.cat(self.feats, dim=0)
+        if crop_test:
+            feats = feats[::2] + feats[1::2]
+            self.pids = self.pids[::2]
+            self.camids = self.camids[::2]
+            self.tids = self.tids[::2]
+            self.num_query = int(self.num_query/2)
+        if self.feat_norm:
+            print("The test feature is normalized")
+            feats = torch.nn.functional.normalize(feats, dim=1, p=2)  # along channel
+
+        return self.pids, self.camids, feats, np.asarray(self.tids)
 
