@@ -177,7 +177,7 @@ def do_inference(cfg,
                  model,
                  val_loader,
                  num_query,
-                 output_feats=True,
+                 output_feats=False,
                  prefix='test'):
     device = "cuda"
     logger = logging.getLogger("reid_baseline.test")
