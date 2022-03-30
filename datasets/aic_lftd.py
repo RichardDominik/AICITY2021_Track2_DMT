@@ -69,8 +69,8 @@ class AICLFTD(BaseImageDataset):
         query_tids = data['tids'][:num_query]
         data_tids = data['tids'][num_query:]
 
-        query_feats = np.empty(num_query, len(feat_path_list), data['feats'].shape[-1])
-        data_feats = np.empty(len(data_pids), len(feat_path_list), data['feats'].shape[-1])
+        query_feats = np.empty([num_query, len(feat_path_list), data['feats'].shape[-1]])
+        data_feats = np.empty([len(data_pids), len(feat_path_list), data['feats'].shape[-1]])
 
         for i, npz_path in enumerate(feat_path_list):
             npz_full_path = os.path.join(feat_path_list[0], prefix + '_out_arrays.npz')
