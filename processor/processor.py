@@ -215,7 +215,7 @@ def do_inference(cfg,
 
     if output_feats:
         pids, camids, feats, tids, num_query = evaluator.out_attribs()
-        np.savez(os.path.join(cfg.OUTPUT_DIR, prefix + cfg.TEST.OUT_MAT), pids=pids, camids=camids, feats=feats.detach().cpu().numpy(), tids=tids, num_query=num_query)
+        np.savez(os.path.join(cfg.OUTPUT_DIR, prefix + '_' + cfg.TEST.OUT_MAT), pids=pids, camids=camids, feats=feats.detach().cpu().numpy(), tids=tids, num_query=num_query)
         print('writing result to {}'.format(cfg.OUTPUT_DIR))
     else:
         cmc, mAP, distmat, pids, camids, qf, gf = evaluator.compute(fic=cfg.TEST.FIC, fac=cfg.TEST.FAC, rm_camera=cfg.TEST.RM_CAMERA,save_dir=cfg.OUTPUT_DIR, crop_test = cfg.TEST.CROP_TEST, la= cfg.TEST.LA)
