@@ -100,7 +100,7 @@ class Backbone(nn.Module):
             self.in_planes = 2048
             self.base = resnext101_ibn_a()
             print('using resnext101_ibn_a as a backbone')
-        elif model_name == 'ltfd':
+        elif model_name == 'lftd':
             self.base = LFTD(1000, 512)
             self.in_planes = 512
         else:
