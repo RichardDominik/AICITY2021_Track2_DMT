@@ -99,7 +99,7 @@ class AICLFTD(BaseImageDataset):
         data_feats = np.empty([len(data_pids), len(feat_path_list), data['feats'].shape[-1]])
 
         for i, npz_path in enumerate(feat_path_list):
-            npz_full_path = os.path.join(feat_path_list[0], 'val_out_arrays.npz')
+            npz_full_path = os.path.join(feat_path_list[0], 'train_out_arrays.npz')
             data = np.load(npz_full_path)
             data_feats[:, i, :] = data['feats']
 
