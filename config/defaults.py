@@ -209,6 +209,7 @@ _C.TEST.NECK_FEAT = 'after'
 _C.TEST.FEAT_NORM = 'yes'
 # Name for saving the distmat after testing.
 _C.TEST.DIST_MAT = "dist_mat.npy"
+_C.TEST.OUT_MAT = "out_arrays.npz"
 # Whether using fliped feature for testing, option: 'on', 'off'
 _C.TEST.FLIP_FEATS = 'off'
 # Whether calculate the eval score option: 'True', 'False'
