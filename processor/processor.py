@@ -176,7 +176,9 @@ def do_train(cfg,
 def do_inference(cfg,
                  model,
                  val_loader,
-                 num_query):
+                 num_query,
+                 output_feats=True,
+                 prefix='test'):
     device = "cuda"
     logger = logging.getLogger("reid_baseline.test")
     logger.info("Enter inferencing")
@@ -210,13 +212,17 @@ def do_inference(cfg,
                 feat = model(img)
             evaluator.update((feat.clone(), pid, camid, trackid))
             img_path_list.extend(imgpath)
-    cmc, mAP, distmat, pids, camids, qf, gf = evaluator.compute(fic=cfg.TEST.FIC, fac=cfg.TEST.FAC, rm_camera=cfg.TEST.RM_CAMERA,save_dir=cfg.OUTPUT_DIR, crop_test = cfg.TEST.CROP_TEST, la= cfg.TEST.LA)
-    np.save(os.path.join(cfg.OUTPUT_DIR, cfg.TEST.DIST_MAT) , distmat)
-    pids, camids, feats, tids = evaluator.out_attribs()
-    np.savez(os.path.join(cfg.OUTPUT_DIR, cfg.TEST.OUT_MAT), pids=pids, camids=camids, feats=feats, tids=tids)
-    print('writing result to {}'.format(cfg.OUTPUT_DIR))
 
-    logger.info("Validation Results ")
-    logger.info("mAP: {:.1%}".format(mAP))
-    for r in [1, 5, 10]:
-        logger.info("CMC curve, Rank-{:<3}:{:.1%}".format(r, cmc[r - 1]))
+    if output_feats:
+        pids, camids, feats, tids, num_query = evaluator.out_attribs()
+        np.savez(os.path.join(cfg.OUTPUT_DIR, prefix + cfg.TEST.OUT_MAT), pids=pids, camids=camids, feats=feats.detach().cpu().numpy(), tids=tids, num_query=num_query)
+        print('writing result to {}'.format(cfg.OUTPUT_DIR))
+    else:
+        cmc, mAP, distmat, pids, camids, qf, gf = evaluator.compute(fic=cfg.TEST.FIC, fac=cfg.TEST.FAC, rm_camera=cfg.TEST.RM_CAMERA,save_dir=cfg.OUTPUT_DIR, crop_test = cfg.TEST.CROP_TEST, la= cfg.TEST.LA)
+        np.save(os.path.join(cfg.OUTPUT_DIR, cfg.TEST.DIST_MAT) , distmat)
+        print('writing result to {}'.format(cfg.OUTPUT_DIR))
+
+        logger.info("Validation Results ")
+        logger.info("mAP: {:.1%}".format(mAP))
+        for r in [1, 5, 10]:
+            logger.info("CMC curve, Rank-{:<3}:{:.1%}".format(r, cmc[r - 1]))

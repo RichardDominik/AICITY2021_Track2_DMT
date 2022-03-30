@@ -233,5 +233,5 @@ class R1_mAP_eval():
             print("The test feature is normalized")
             feats = torch.nn.functional.normalize(feats, dim=1, p=2)  # along channel
 
-        return self.pids, self.camids, feats, np.asarray(self.tids)
+        return self.pids, self.camids, feats, np.asarray(self.tids), self.num_query
 
