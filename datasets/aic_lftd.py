@@ -81,15 +81,15 @@ class AICLFTD(BaseImageDataset):
 
         if relabel:
             pid2label = self._relabel(data_pids)
-            dataset = [(f, pid2label[pid], camid, tid) for f, pid, camid, tid in (zip(data_feats, data_pids, data_camids, data_tids)) if pid != -1]
+            dataset = [(f, pid2label[pid], camid, tid) for f, pid, camid, tid in (zip(data_feats, data_pids, data_camids, data_tids))]
         else:
-            dataset = [(f, pid, camid, tid) for f, pid, camid, tid in (zip(data_feats, data_pids, data_camids, data_tids)) if pid != -1]
-        query_dataset = [(f, pid, camid, tid) for f, pid, camid, tid in (zip(query_feats, query_pids, query_camids, query_tids)) if pid != -1]
+            dataset = [(f, pid, camid, tid) for f, pid, camid, tid in (zip(data_feats, data_pids, data_camids, data_tids))]
+        query_dataset = [(f, pid, camid, tid) for f, pid, camid, tid in (zip(query_feats, query_pids, query_camids, query_tids))]
 
         return dataset, query_dataset
 
     def _process_npz_train(self, feat_path_list, relabel=False):
-        first_npz_path = os.path.join(feat_path_list[0], 'val_out_arrays.npz')
+        first_npz_path = os.path.join(feat_path_list[0], 'train_out_arrays.npz')
         data = np.load(first_npz_path)
 
         data_pids = data['pids']
