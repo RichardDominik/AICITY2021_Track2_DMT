@@ -160,7 +160,7 @@ class Backbone(nn.Module):
         else:
             x = self.base(x)
 
-        if self.model_name != 'lftd':
+        if self.model_name == 'lftd':
             global_feat = x
         else:
             global_feat = nn.functional.avg_pool2d(x, x.shape[2:4])
