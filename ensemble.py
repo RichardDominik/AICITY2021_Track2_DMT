@@ -36,6 +36,8 @@ distmat_paths = [
         './logs/stage2/swin_transformer_384/v2/pth29/dist_mat.npy',
         ]
 
+distmat_paths = ['./logs/stage1/lftd/distmat.npy']
+
 # method 1
 distmat = np.zeros((1103,31238))
 for i in distmat_paths:
