@@ -41,7 +41,6 @@ class LFTD(torch.nn.Module):
     def _matmul_in_time(self, x, kernel):
         input_size = x.size()
         x = torch.reshape(x, [-1, input_size[-1]])
-        print(x.size())
         x = torch.matmul(x, kernel)
         x = torch.reshape(x, [-1, input_size[1], x.size(dim=-1)])
         return x
