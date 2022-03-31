@@ -12,7 +12,7 @@ from .layers.lftd import LFTD, LFTDModel
 from .layers.pooling import GeM, GeneralizedMeanPooling,GeneralizedMeanPoolingP
 import torch.nn.functional as F
 from loss.metric_learning import Arcface, Cosface, AMSoftmax, CircleLoss
-from efficientnet_pytorch import EfficientNet
+# from efficientnet_pytorch import EfficientNet
 import copy
 
 
@@ -72,10 +72,10 @@ class Backbone(nn.Module):
             self.in_planes = 2048
             self.base = se_resnet101_ibn_a(last_stride,frozen_stages=cfg.MODEL.FROZEN)
             print('using se_resnet101_ibn_a as a backbone')
-        elif model_name == 'efficientnet_b7':
-                print('using efficientnet_b7 as a backbone')
-                self.base = EfficientNet.from_pretrained('efficientnet-b7', advprop=False)
-                self.in_planes = self.base._fc.in_features
+        # elif model_name == 'efficientnet_b7':
+        #         print('using efficientnet_b7 as a backbone')
+        #         self.base = EfficientNet.from_pretrained('efficientnet-b7', advprop=False)
+        #         self.in_planes = self.base._fc.in_features
         elif model_name == 'densenet169_ibn_a':
             self.in_planes = 1664
             self.base = densenet169_ibn_a()
