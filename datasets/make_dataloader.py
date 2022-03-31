@@ -29,7 +29,7 @@ def train_collate_fn(batch):
     pids = torch.tensor(pids, dtype=torch.int64)
     camids = torch.tensor(camids, dtype=torch.int64)
     if isinstance(imgs[0], np.ndarray):
-        return torch.from_numpy(np.array(imgs)), pids, camids
+        return torch.from_numpy(np.array(imgs, dtype=np.float32)), pids, camids
     return torch.stack(imgs, dim=0), pids, camids
 
 def val_collate_fn(batch):   ##### revised by luo
