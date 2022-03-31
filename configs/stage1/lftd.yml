@@ -46,7 +46,7 @@ TEST:
   RE_RANKING_TRACK: True
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
-  FLIP_FEATS: 'on'
+  FLIP_FEATS: 'off'
   EVAL: True
   FIC: True
 
