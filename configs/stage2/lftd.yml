@@ -42,7 +42,7 @@ SOLVER:
   FP16_ENABLED: True
 
 TEST:
-  IMS_PER_BATCH: 128
+  IMS_PER_BATCH: 16
   RE_RANKING: True
   RE_RANKING_TRACK: True
   WEIGHT: './logs/stage2/lftd/v1/lftd_3.pth'

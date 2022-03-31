@@ -246,7 +246,9 @@ if __name__ == '__main__':
             final_dist[final_dist < 0.0] = 0.0
             final_dist[final_dist > 1.0] = 1.0
             cluster = DBSCAN(eps=cfg.STAGE2.EPS, min_samples=10, metric='precomputed', n_jobs=-1)
+            print("DBSCAN finished")
             pseudo_labels = cluster.fit_predict(final_dist)
+            print("Pseudo labels generated")
             labelset = list(set(pseudo_labels[pseudo_labels >= 0]))
             idxs = np.where(np.in1d(pseudo_labels, labelset))
             psolabels = pseudo_labels[idxs]
