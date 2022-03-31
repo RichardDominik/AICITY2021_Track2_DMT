@@ -245,6 +245,7 @@ if __name__ == '__main__':
             final_dist = calc_distmat(target_features)
             final_dist[final_dist < 0.0] = 0.0
             final_dist[final_dist > 1.0] = 1.0
+            print("DBSCAN started")
             cluster = DBSCAN(eps=cfg.STAGE2.EPS, min_samples=10, metric='precomputed', n_jobs=-1)
             print("DBSCAN finished")
             pseudo_labels = cluster.fit_predict(final_dist)
