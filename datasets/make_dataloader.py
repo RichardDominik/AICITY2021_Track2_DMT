@@ -243,7 +243,7 @@ def get_testloader_uda(cfg, aug=False):
     dataset = __factory[cfg.DATASETS.NAMES](root=cfg.DATASETS.ROOT_DIR, plus_num_id=cfg.DATASETS.PLUS_NUM_ID)
 
     if cfg.DATASETS.NAMES == 'aic_lftd':
-        train_set = LFTDDataset(dataset.train)
+        val_set = LFTDDataset(dataset.train)
     else:
         val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
     val_loader = DataLoader(
