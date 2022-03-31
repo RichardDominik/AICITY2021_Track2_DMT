@@ -242,7 +242,10 @@ def get_testloader_uda(cfg, aug=False):
 
     dataset = __factory[cfg.DATASETS.NAMES](root=cfg.DATASETS.ROOT_DIR, plus_num_id=cfg.DATASETS.PLUS_NUM_ID)
 
-    val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
+    if cfg.DATASETS.NAMES == 'aic_lftd':
+        train_set = LFTDDataset(dataset.train)
+    else:
+        val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
     val_loader = DataLoader(
         val_set, batch_size=cfg.TEST.IMS_PER_BATCH, shuffle=False, num_workers=num_workers,
         collate_fn=val_collate_fn
