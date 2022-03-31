@@ -182,7 +182,10 @@ def get_trainloader_uda(cfg, trainset=None, num_classes=0):
 
     num_workers = cfg.DATALOADER.NUM_WORKERS
 
-    train_set = ImageDataset(trainset, train_transforms)
+    if cfg.MODEL.NAME == 'lftd':
+        train_set = LFTDDataset(trainset)
+    else:
+        train_set = ImageDataset(trainset, train_transforms)
 
     if 'triplet' in cfg.DATALOADER.SAMPLER:
 
