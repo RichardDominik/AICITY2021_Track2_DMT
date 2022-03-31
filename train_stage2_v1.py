@@ -212,7 +212,7 @@ if __name__ == '__main__':
     num_classes = 1500
     model = make_model(cfg, num_class=num_classes)
     initial_weights = torch.load(cfg.MODEL.PRETRAIN_PATH, map_location='cpu')
-    print("Initial weights:", initial_weights)
+    # print("Initial weights:", initial_weights)
     copy_state_dict(initial_weights, model)
 
 
