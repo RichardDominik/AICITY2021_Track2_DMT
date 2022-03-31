@@ -1,14 +1,14 @@
 # SeResNet101-IBN-a
-python test.py --config_file configs/stage2/se_resnet101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/se_resnet101a_384/v1/se_resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/se_resnet101a_384/v1' > ./logs/se_resnet101a_384_npz_extract_v1.log
+# python test.py --config_file configs/stage2/se_resnet101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/se_resnet101a_384/v1/se_resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/se_resnet101a_384/v1' > ./logs/se_resnet101a_384_npz_extract_v1.log
 
 # ResNext101-IBN-a
-python test.py --config_file configs/stage2/resnext101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/resnext101a_384/v1/resnext101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/resnext101a_384/v1' > ./logs/resnext101a_384_npz_extract_v1.log
+# python test.py --config_file configs/stage2/resnext101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/resnext101a_384/v1/resnext101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/resnext101a_384/v1' > ./logs/resnext101a_384_npz_extract_v1.log
 
 # ResNet101-IBN-a
-python test.py --config_file configs/stage2/101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/101a_384/v1/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384/v1' > ./logs/101a_384_npz_extract_v1.log
+# python test.py --config_file configs/stage2/101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/101a_384/v1/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384/v1' > ./logs/101a_384_npz_extract_v1.log
 
 # ResNet101-IBN-a (recrop)
-python test.py --config_file configs/stage2/101a_384_recrop.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/101a_384_recrop/v1/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384_recrop/v1' > ./logs/101a_384_recrop_npz_extract_v1.log
+#python test.py --config_file configs/stage2/101a_384_recrop.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/101a_384_recrop/v1/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384_recrop/v1' > ./logs/101a_384_recrop_npz_extract_v1.log
 
 # ResNet101-IBN-a (spgan)
 python test.py --config_file configs/stage2/101a_384_spgan.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/101a_384_spgan/v1/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384_spgan/v1' > ./logs/101a_384_spgan_npz_extract_v1.log

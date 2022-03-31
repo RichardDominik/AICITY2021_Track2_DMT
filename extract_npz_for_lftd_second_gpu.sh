@@ -1,11 +1,11 @@
 # SeResNet101-IBN-a
-python test.py --config_file configs/stage2/se_resnet101a_384.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/se_resnet101a_384/v2/se_resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/se_resnet101a_384/v2' > ./logs/se_resnet101a_384_npz_extract_v2.log
+# python test.py --config_file configs/stage2/se_resnet101a_384.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/se_resnet101a_384/v2/se_resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/se_resnet101a_384/v2' > ./logs/se_resnet101a_384_npz_extract_v2.log
 
 # ResNext101-IBN-a
-python test.py --config_file configs/stage2/resnext101a_384.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/resnext101a_384/v2/resnext101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/resnext101a_384/v2' > ./logs/resnext101a_384_npz_extract_v22.log
+# python test.py --config_file configs/stage2/resnext101a_384.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/resnext101a_384/v2/resnext101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/resnext101a_384/v2' > ./logs/resnext101a_384_npz_extract_v22.log
 
 # ResNet101-IBN-a
-python test.py --config_file configs/stage2/101a_384.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/101a_384/v2/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384/v2' > ./logs/101a_384_npz_extract_v2.log
+# python test.py --config_file configs/stage2/101a_384.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/101a_384/v2/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384/v2' > ./logs/101a_384_npz_extract_v2.log
 
 # ResNet101-IBN-a (recrop)
 python test.py --config_file configs/stage2/101a_384_recrop.yml MODEL.DEVICE_ID "('1')" TEST.WEIGHT './logs/stage2/101a_384_recrop/v2/resnet101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/101a_384_recrop/v2' > ./logs/101a_384_recrop_npz_extract_v2.log
