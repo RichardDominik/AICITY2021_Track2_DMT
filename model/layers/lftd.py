@@ -47,7 +47,7 @@ class LFTD(torch.nn.Module):
 
     def forward(self, x):
         y = torch.tanh(self._matmul_in_time(x, self.compression_kernel) + self.compression_bias)
-        avg = torch.tile(torch.mean(y, 1, keepdim=True), [1, x.size(dim=1), 1])
+        avg = torch.mean(y, 1, keepdim=True).repeat([1, x.size(dim=1), 1])
         y_avg = torch.cat([y, avg], dim=2)
         weights = self._matmul_in_time(y_avg, self.weights_gen_kernel)
         weights = torch.softmax(weights, dim=1)
