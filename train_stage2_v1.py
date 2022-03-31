@@ -104,7 +104,9 @@ def extract_features(model, data_loader, print_freq):
 
 def calc_distmat(feat):
     rerank_distmat = compute_jaccard_distance(feat, k1=30, k2=6, search_option=3)
+    print("Rerank distmat shape: ", rerank_distmat.shape)
     cosine_distmat = batch_cosine_dist(feat, feat).cpu().numpy()
+    print("Cosine distmat shape: ", cosine_distmat.shape)
     final_dist = rerank_distmat * 0.9 + cosine_distmat * 0.1
 
     return final_dist
