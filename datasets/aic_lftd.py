@@ -28,7 +28,7 @@ class AIC_LFTD(BaseImageDataset):
             'logs/stage2/transreid_256/v1/', 'logs/stage2/transreid_256/v2/',
             # './logs/stage2/swin_transformer/v1/', './logs/stage2/swin_transformer/v2/',
             # './logs/stage2/swin_transformer_spgan/v1/', './logs/stage2/swin_transformer_spgan/v2/',
-            'logs/stage2/swin_transformer_384/v1/pth29/', 'logs/stage2/swin_transformer_384/v2/pth29/'
+            # 'logs/stage2/swin_transformer_384/v1/pth29/', 'logs/stage2/swin_transformer_384/v2/pth29/'
         ]
 
         feat_paths = [os.path.join(root, feat_path) for feat_path in feat_paths]
