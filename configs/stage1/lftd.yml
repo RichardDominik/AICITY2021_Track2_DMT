@@ -6,6 +6,7 @@ MODEL:
   NAME: 'lftd'
   NO_MARGIN: True
   DEVICE_ID: ('0')
+  NECK: 'no'
 
 INPUT:
   SIZE_TRAIN: [384, 384]
