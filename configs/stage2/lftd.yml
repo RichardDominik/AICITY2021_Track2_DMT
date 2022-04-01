@@ -47,8 +47,8 @@ TEST:
   RE_RANKING: True
   RE_RANKING_TRACK: True
   WEIGHT: './logs/stage2/lftd/v1/lftd_2.pth'
-  NECK_FEAT: 'after'
-  FEAT_NORM: 'yes'
+  NECK_FEAT: 'no'
+  FEAT_NORM: 'no'
   FLIP_FEATS: 'off'
   EVAL: True
   FIC: True

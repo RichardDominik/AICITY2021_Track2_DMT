@@ -4,6 +4,7 @@ class LFTDModel(torch.nn.Module):
     def __init__(self, input_dim, output_dim):
         super().__init__()
         self.lftd = LFTD(input_dim, output_dim)
+        self.euclidian_weights = torch.nn.Parameter(torch.ones([1, output_dim]))
 
     def forward(self, x):
         return self.lftd(x)

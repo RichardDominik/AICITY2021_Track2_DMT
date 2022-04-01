@@ -171,6 +171,9 @@ class Backbone(nn.Module):
         elif self.neck == 'bnneck':
             feat = self.bottleneck(global_feat)
 
+        if self.model_name == 'lftd':
+            global_feat = torch.relu(self.base.euclidian_weights) * global_feat
+
         if self.training:
             if self.ID_LOSS_TYPE in ('arcface', 'cosface', 'amsoftmax', 'circle'):
                 cls_score = self.classifier(feat, label)
