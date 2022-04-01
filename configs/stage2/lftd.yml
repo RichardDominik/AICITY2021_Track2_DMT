@@ -46,7 +46,7 @@ TEST:
   IMS_PER_BATCH: 16
   RE_RANKING: True
   RE_RANKING_TRACK: True
-  WEIGHT: './logs/stage2/lftd/v1/lftd_3.pth'
+  WEIGHT: './logs/stage2/lftd/v1/lftd_2.pth'
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
   FLIP_FEATS: 'off'
