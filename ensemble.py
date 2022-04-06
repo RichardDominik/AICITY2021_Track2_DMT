@@ -58,7 +58,8 @@ sort_distmat_index = np.argsort(distmat, axis=1)
 print(sort_distmat_index)
 print('The shape of distmat is: {}'.format(distmat.shape))
 
-save_path = './track_s2.txt'
+#save_path = './track_s2.txt'
+save_path = './track2.txt'
 with open(save_path,'w') as f:
     for item in sort_distmat_index:
         for i in range(99):
