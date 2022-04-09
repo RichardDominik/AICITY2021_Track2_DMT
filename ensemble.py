@@ -26,8 +26,11 @@ distmat_paths = [
         './logs/stage2/se_resnet101a_384/v1/dist_mat.npy',
         './logs/stage2/se_resnet101a_384/v2/dist_mat.npy',
 
-        './logs/stage2/swin_transformer/v1/dist_mat.npy',
-        './logs/stage2/swin_transformer/v2/dist_mat.npy',
+        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/dist_mat.npy',
+        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v2/dist_mat.npy',
+
+        # './logs/stage2/swin_transformer/v1/dist_mat.npy',
+        # './logs/stage2/swin_transformer/v2/dist_mat.npy',
 
         #'./logs/stage2/transreid_256/v1/dist_mat.npy': 0.87,
         #'./logs/stage2/transreid_256/v2/dist_mat.npy': 0.87,
