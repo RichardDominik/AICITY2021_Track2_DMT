@@ -1,6 +1,6 @@
 MODEL:
   PRETRAIN_CHOICE: 'self'
-  PRETRAIN_PATH: './logs/stage2/swin_transformer/v1/swin_transformer_2.pth'
+  PRETRAIN_PATH: './logs/stage1/swin_transformer/swin_transformer_224_80_epochs/swin_transformer_80.pth'
   METRIC_LOSS_TYPE: 'triplet'
   IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
@@ -48,7 +48,7 @@ TEST:
   IMS_PER_BATCH: 16
   RE_RANKING: True
   RE_RANKING_TRACK: True
-  WEIGHT: './logs/stage2/swin_transformer/v1/swin_transformer_2.pth'
+  WEIGHT: './logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/swin_transformer_2.pth'
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
   FLIP_FEATS: 'no'
@@ -61,4 +61,4 @@ STAGE2:
   EPS: 0.55
   LA: 0.0005
       
-OUTPUT_DIR: './logs/stage2/swin_transformer/v1'
+OUTPUT_DIR: './logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1'
