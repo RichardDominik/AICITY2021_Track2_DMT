@@ -5,26 +5,26 @@ import os
 
 
 distmat_paths = [
-        './logs/stage2/resnext101a_384/v1/dist_mat.npy',
-        './logs/stage2/resnext101a_384/v2/dist_mat.npy',
+        #'./logs/stage2/resnext101a_384/v1/dist_mat.npy',
+        #'./logs/stage2/resnext101a_384/v2/dist_mat.npy',
 
-        './logs/stage2/101a_384/v1/dist_mat.npy',
-        './logs/stage2/101a_384/v2/dist_mat.npy',
+        #'./logs/stage2/101a_384/v1/dist_mat.npy',
+        #'./logs/stage2/101a_384/v2/dist_mat.npy',
 
-        './logs/stage2/101a_384_recrop/v1/dist_mat.npy',
-        './logs/stage2/101a_384_recrop/v2/dist_mat.npy',
+        #'./logs/stage2/101a_384_recrop/v1/dist_mat.npy',
+        #'./logs/stage2/101a_384_recrop/v2/dist_mat.npy',
 
-        './logs/stage2/101a_384_spgan/v1/dist_mat.npy',
-        './logs/stage2/101a_384_spgan/v2/dist_mat.npy',
+        #'./logs/stage2/101a_384_spgan/v1/dist_mat.npy',
+        #'./logs/stage2/101a_384_spgan/v2/dist_mat.npy',
 
-        './logs/stage2/densenet169a_384/v1/dist_mat.npy',
-        './logs/stage2/densenet169a_384/v2/dist_mat.npy',
+        #'./logs/stage2/densenet169a_384/v1/dist_mat.npy',
+        #'./logs/stage2/densenet169a_384/v2/dist_mat.npy',
 
-        './logs/stage2/s101_384/v1/dist_mat.npy',
-        './logs/stage2/s101_384/v2/dist_mat.npy',
+        #'./logs/stage2/s101_384/v1/dist_mat.npy',
+        #'./logs/stage2/s101_384/v2/dist_mat.npy',
 
-        './logs/stage2/se_resnet101a_384/v1/dist_mat.npy',
-        './logs/stage2/se_resnet101a_384/v2/dist_mat.npy',
+        #'./logs/stage2/se_resnet101a_384/v1/dist_mat.npy',
+        #'./logs/stage2/se_resnet101a_384/v2/dist_mat.npy',
 
         'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/dist_mat.npy',
         'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v2/dist_mat.npy',
