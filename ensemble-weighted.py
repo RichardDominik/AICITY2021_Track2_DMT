@@ -41,8 +41,8 @@ distmat_paths = {
         #'./logs/stage2/transreid_256/v1/dist_mat.npy': 0.87,
         #'./logs/stage2/transreid_256/v2/dist_mat.npy': 0.87,
 
-        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/dist_mat.npy': 0.6,
-        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v2/dist_mat.npy': 0.6,
+        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/dist_mat.npy': 0.5,
+        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v2/dist_mat.npy': 0.5,
 
 	    # './logs/stage2/swin_transformer/v1/dist_mat.npy': 0.75,
 	    # './logs/stage2/swin_transformer/v2/dist_mat.npy': 0.75,
