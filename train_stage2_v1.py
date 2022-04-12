@@ -225,7 +225,7 @@ if __name__ == '__main__':
 
     for epoch in range(cfg.SOLVER.MAX_EPOCHS):
 
-        if epoch % 3 == 0: # and epoch < 9) or (epoch % 6 == 0):
+        if epoch % 30 == 0: # and epoch < 9) or (epoch % 6 == 0):
             target_features, target_labels, target_camids, target_trkids = extract_features(model, val_loader, print_freq=100)
             target_features = F.normalize(target_features, dim=1)
             if cfg.MODEL.NAME != 'lftd':

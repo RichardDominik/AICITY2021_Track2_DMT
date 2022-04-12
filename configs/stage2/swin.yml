@@ -29,7 +29,7 @@ DATALOADER:
 
 SOLVER:
   OPTIMIZER_NAME: 'SGD'
-  MAX_EPOCHS: 3
+  MAX_EPOCHS: 30
   BASE_LR: 0.0004
   IMS_PER_BATCH: 16
   STEPS: [40, 70]
@@ -48,7 +48,7 @@ TEST:
   IMS_PER_BATCH: 16
   RE_RANKING: True
   RE_RANKING_TRACK: True
-  WEIGHT: './logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/swin_transformer_2.pth'
+  WEIGHT: './logs/stage2/swin_transformer/swin_transformer_224_80_30_epochs/v1/swin_transformer_29.pth'
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
   FLIP_FEATS: 'no'
@@ -61,4 +61,4 @@ STAGE2:
   EPS: 0.55
   LA: 0.0005
       
-OUTPUT_DIR: './logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1'
+OUTPUT_DIR: './logs/stage2/swin_transformer/swin_transformer_224_80_30_epochs/v1'
