@@ -1,9 +1,9 @@
-# AICITY2021_Track2_DMT
-The 1st place solution of track2 (Vehicle Re-Identification) in the NVIDIA AI City Challenge at CVPR 2021 Workshop. 
+# Master thesis
+NVIDIA AI City Challenge solution for master thesis
 
 ## Introduction
 
-Detailed information of NVIDIA AI City Challenge 2021 can be found [here](https://www.aicitychallenge.org/).
+Detailed information of NVIDIA AI City Challenge 2022 can be found [here](https://www.aicitychallenge.org/).
 
 The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshuting555/AICITY2020_DMT_VehicleReID), [TransReID]( https://github.com/heshuting555/TransReID ), [reid_strong baseline]( https://github.com/michuanhaohao/reid-strong-baseline ) and 
 [AICITY2021_Track2_DMT](https://github.com/michuanhaohao/AICITY2021_Track2_DMT).
