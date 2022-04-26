@@ -5,7 +5,8 @@ The 1st place solution of track2 (Vehicle Re-Identification) in the NVIDIA AI Ci
 
 Detailed information of NVIDIA AI City Challenge 2021 can be found [here](https://www.aicitychallenge.org/).
 
-The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshuting555/AICITY2020_DMT_VehicleReID), [TransReID]( https://github.com/heshuting555/TransReID )  and [reid_strong baseline]( https://github.com/michuanhaohao/reid-strong-baseline ).
+The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshuting555/AICITY2020_DMT_VehicleReID), [TransReID]( https://github.com/heshuting555/TransReID ), [reid_strong baseline]( https://github.com/michuanhaohao/reid-strong-baseline ) and 
+[AICITY2021_Track2_DMT](https://github.com/michuanhaohao/AICITY2021_Track2_DMT).
 
 ## Get Started
 
@@ -60,7 +61,7 @@ The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshut
 	- swin_base_patch4_window12_384_22kto1k.pth can be downloaded from [here](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window12_384_22kto1k.pth)
 ## Trainint and Test
 
-We utilize 1 GPU (32GB) for training. You can train and test one backbone as follow. 
+You can train and test one backbone as follow. 
 
 ```bash
 # ResNext101-IBN-a
@@ -71,7 +72,7 @@ python train_stage2_v2.py --config_file configs/stage2/resnext101a_384.yml MODEL
 python test.py --config_file configs/stage2/1resnext101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/resnext101a_384/v1/resnext101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/resnext101a_384/v1'
 python test.py --config_file configs/stage2/resnext101a_384.yml MODEL.DEVICE_ID "('0')" TEST.WEIGHT './logs/stage2/resnext101a_384/v2/resnext101_ibn_a_2.pth' OUTPUT_DIR './logs/stage2/resnext101a_384/v2'
 ```
-You should train camera and viewpoint models before the inference stage. You also can directly use our trained results (track_cam_rk.npy and track_view_rk.npy):
+You should train camera and viewpoint models before the inference stage. You also can directly use trained results from original paper (track_cam_rk.npy and track_view_rk.npy):
 
 ```bash
 python train_cam.py --config_file configs/camera_view/camera_101a.yml
@@ -84,7 +85,7 @@ You can train all backbones by checking ***run.sh***. Then, you can ensemble all
 python ensemble.py
 ```
 
-All trained models can be downloaded from [here](https://drive.google.com/drive/folders/1aCQmTbYQE-mq-07q86NIMLLZRc82mc5t?usp=sharing)
+All trained models from original paper can be downloaded from [here](https://drive.google.com/drive/folders/1aCQmTbYQE-mq-07q86NIMLLZRc82mc5t?usp=sharing)
 
 ## Weighted ensemble
 If you want to try weighted ensemble then, you can ensemble all results via command:
@@ -99,13 +100,13 @@ If you want to try LFTD ensemble then, you should check ***extract_npz_for_lftd_
 ## Leaderboard
 |TeamName|mAP|Link|
 |--------|----|-------|
-|**DMT(Ours)**|0.7445|[code](https://github.com/michuanhaohao/AICITY2021_Track2_DMT)|
+|**DMT(Original paper)**|0.7445|[code](https://github.com/michuanhaohao/AICITY2021_Track2_DMT)|
 |NewGeneration|0.7151|[code](https://github.com/Xuanmeng-Zhang/AICITY2021-Track2)|
 |CyberHu|0.6550|code|
 
 ## Citation
 
-If you find our work useful in your research, please consider citing:
+If you find original work useful in your research, please consider citing:
 ```
 @inproceedings{luo2021empirical,
  title={An Empirical Study of Vehicle Re-Identification on the AI City Challenge},
