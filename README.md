@@ -11,11 +11,21 @@ The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshut
 
 1. `cd` to folder where you want to download this repo
 
-2. Run `git clone https://github.com/michuanhaohao/AICITY2021_Track2_DMT.git`
+2. Run `git clone https://github.com/RichardDominik/AICITY2021_Track2_DMT`
 
 3. Install dependencies: `pip install requirements.txt`
 
    We use cuda 11.0/python 3.7/torch 1.6.0/torchvision 0.7.0 for training and testing.
+
+   If you want to use conda instead, first create enviroment:
+
+   conda create --name aic-track2
+
+   Then install all dependencies.
+
+   You can then activate the environment using:
+
+   conda activate aic-track2
 
 4. Prepare Datasets
 		Download Original dataset, [Cropped_dataset](https://drive.google.com/file/d/1bxNjs_KZ_ocnhpsZmdMsIut93z8CqgBN/view?usp=sharing), and [SPGAN_dataset](https://drive.google.com/file/d/1nPOTrK9WUEK38mwei9yAOCMlNiF1UJXV/view?usp=sharing).
