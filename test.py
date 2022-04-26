@@ -51,4 +51,4 @@ if __name__ == "__main__":
                  output_feats=True,
                  prefix='val')
 
-    # do_inference(cfg, model, train_loader, num_query, output_feats=True, prefix='train')
+    do_inference(cfg, model, train_loader, num_query, output_feats=True, prefix='train')

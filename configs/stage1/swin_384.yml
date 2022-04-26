@@ -57,4 +57,4 @@ TEST:
   FLIP_FEATS: 'on'
   EVAL: True
   FIC: True
-OUTPUT_DIR: './logs/stage1/swin_transformer'
+OUTPUT_DIR: './logs/stage1/swin_transformer_384'

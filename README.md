@@ -42,6 +42,8 @@ The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshut
 	-  resnet101_ibn_a-59ea0ac6.pth, densenet169_ibn_a-9f32c161.pth, resnext101_ibn_a-6ace051d.pth and se_resnet101_ibn_a-fabed4e2.pth can be downloaded from [IBN-Net](https://github.com/XingangPan/IBN-Net)
 	-  resnest101-22405ba7.pth can be downloaded from [ResNest](https://github.com/zhanghang1989/ResNeSt)
 	-  jx_vit_base_p16_224-80ecf9dd.pth can be downloaded from [here](https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-vitjx/jx_vit_base_p16_224-80ecf9dd.pth)
+	- swin_base_patch4_window7_224_22kto1k.pth can be downloaded from [here](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224_22kto1k.pth)
+	- swin_base_patch4_window12_384_22kto1k.pth can be downloaded from [here](https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window12_384_22kto1k.pth)
 ## Trainint and Test
 
 We utilize 1 GPU (32GB) for training. You can train and test one backbone as follow. 
@@ -62,13 +64,23 @@ python train_cam.py --config_file configs/camera_view/camera_101a.yml
 python train_view.py --config_file configs/camera_view/view_101a.yml
 ```
 
-You can train all eight backbones by checking ***run.sh***. Then, you can ensemble all results:
+You can train all backbones by checking ***run.sh***. Then, you can ensemble all results:
 
 ```bash
 python ensemble.py
 ```
 
 All trained models can be downloaded from [here](https://drive.google.com/drive/folders/1aCQmTbYQE-mq-07q86NIMLLZRc82mc5t?usp=sharing)
+
+## Weighted ensemble
+If you want to try weighted ensemble then, you can ensemble all results via command:
+
+```bash
+python ensemble-weighted.py
+```
+
+## LFTD ensemble
+If you want to try LFTD ensemble then, you should check ***extract_npz_for_lftd_first_gpu.sh*** and ***extract_npz_for_lftd_second_gpu.sh*** scripts for extracting npz files from different backones. Then you should check ***train_lftd.sh*** script.
 
 ## Leaderboard
 |TeamName|mAP|Link|

@@ -42,7 +42,7 @@ distmat_paths = [
         # './logs/stage2/swin_transformer_384/v2/pth29/dist_mat.npy',
 ]
 
-
+# LFTD
 # distmat_paths = ['./logs/stage2/lftd/v1/dist_mat.npy']
 
 # method 1
