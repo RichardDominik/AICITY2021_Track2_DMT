@@ -19,13 +19,17 @@ The code is modified from [AICITY2020_DMT_VehicleReID](https://github.com/heshut
 
    If you want to use conda instead, first create enviroment:
 
+   ```bash
    conda create --name aic-track2
+   ```
 
    Then install all dependencies.
 
    You can then activate the environment using:
-
+   
+   ```bash
    conda activate aic-track2
+   ```
 
 4. Prepare Datasets
 		Download Original dataset, [Cropped_dataset](https://drive.google.com/file/d/1bxNjs_KZ_ocnhpsZmdMsIut93z8CqgBN/view?usp=sharing), and [SPGAN_dataset](https://drive.google.com/file/d/1nPOTrK9WUEK38mwei9yAOCMlNiF1UJXV/view?usp=sharing).
