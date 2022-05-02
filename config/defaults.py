@@ -87,6 +87,19 @@ _C.INPUT.PIXEL_STD = [0.229, 0.224, 0.225]
 _C.INPUT.PADDING = 10
 _C.INPUT.RESIZECROP = False
 _C.INPUT.COLORJIT_PROB = 0.0
+
+# Swin transformer
+# Parameters taken from https://github.com/microsoft/Swin-Transformer/blob/main/configs/swin_base_patch4_window7_224.yaml
+_C.MODEL.SWIN_TRANSFORMER_ENABLED = False
+_C.MODEL.SWIN_TRANSFORMER_DROP_PATH_RATE = 0.1
+_C.MODEL.SWIN_TRANSFORMER_PATCH_SIZE = 4
+_C.MODEL.SWIN_TRANSFORMER_EMBED_DIM = 128
+_C.MODEL.SWIN_TRANSFORMER_DEPTHS = [2, 2, 18, 2]
+_C.MODEL.SWIN_TRANSFORMER_NUM_HEADS = [4, 8, 16, 32]
+_C.MODEL.SWIN_TRANSFORMER_WINDOW_SIZE = 7
+_C.MODEL.SWIN_TRANSFORMER_DROP_RATE= 0.0
+_C.MODEL.SWIN_TRANSFORMER_ATTN_DROP_RATE = 0.0
+
 # -----------------------------------------------------------------------------
 # Dataset
 # -----------------------------------------------------------------------------
@@ -94,7 +107,7 @@ _C.DATASETS = CN()
 # List of the dataset names for training, as present in paths_catalog.py
 _C.DATASETS.NAMES = ('market1501')
 # Root directory where datasets should be used (and downloaded if not found)
-_C.DATASETS.ROOT_DIR = ('/home/michuan.lh/datasets')
+_C.DATASETS.ROOT_DIR = ('/home/d/dominik3/diplomovka/dataset')
 _C.DATASETS.PLUS_NUM_ID = 100
 _C.DATASETS.QUERY_MINING = False
 # -----------------------------------------------------------------------------
@@ -196,6 +209,7 @@ _C.TEST.NECK_FEAT = 'after'
 _C.TEST.FEAT_NORM = 'yes'
 # Name for saving the distmat after testing.
 _C.TEST.DIST_MAT = "dist_mat.npy"
+_C.TEST.OUT_MAT = "out_arrays.npz"
 # Whether using fliped feature for testing, option: 'on', 'off'
 _C.TEST.FLIP_FEATS = 'off'
 # Whether calculate the eval score option: 'True', 'False'

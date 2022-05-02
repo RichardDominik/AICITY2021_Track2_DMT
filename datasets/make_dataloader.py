@@ -1,10 +1,12 @@
+import numpy as np
 import torch
 import torchvision.transforms as T
-from torch.utils.data import DataLoader
-from .bases import ImageDataset
+from torch.utils.data import DataLoader, TensorDataset
+from .bases import ImageDataset, LFTDDataset
 from .preprocessing import RandomErasing
 from .sampler import RandomIdentitySampler
 from .aic import AIC
+from .aic_lftd import AIC_LFTD
 from .aic_sim import AIC_SIM
 from .aic_sim_spgan import AIC_SIM_SPGAN
 from .sim_view import SIM_VIEW
@@ -16,6 +18,7 @@ __factory = {
     'aic_sim': AIC_SIM,
     'aic_sim_spgan': AIC_SIM_SPGAN,
     'sim_view': SIM_VIEW,
+    'aic_lftd': AIC_LFTD
 }
 
 def train_collate_fn(batch):
@@ -25,15 +28,19 @@ def train_collate_fn(batch):
     imgs, pids, camids, _ , _ = zip(*batch)
     pids = torch.tensor(pids, dtype=torch.int64)
     camids = torch.tensor(camids, dtype=torch.int64)
+    if isinstance(imgs[0], np.ndarray):
+        return torch.from_numpy(np.array(imgs, dtype=np.float32)), pids, camids
     return torch.stack(imgs, dim=0), pids, camids
 
 def val_collate_fn(batch):   ##### revised by luo
     imgs, pids, camids, trackids, img_paths = zip(*batch)
     #  camidssss = torch.tensor(camids, dtype=torch.int64)
+    if isinstance(imgs[0], np.ndarray):
+        return torch.from_numpy(np.array(imgs, dtype=np.float32)), pids, camids, trackids, img_paths
     return torch.stack(imgs, dim=0), pids, camids, trackids, img_paths
 
 
-def make_dataloader(cfg):
+def make_dataloader(cfg, feat_extraction=False):
     if cfg.INPUT.RESIZECROP == True:
         randomcrop = T.RandomResizedCrop(cfg.INPUT.SIZE_TRAIN,scale=(0.75,1.0), ratio=(0.75,1.3333), interpolation=3)
     else:
@@ -59,7 +66,10 @@ def make_dataloader(cfg):
     num_workers = cfg.DATALOADER.NUM_WORKERS
 
     dataset = __factory[cfg.DATASETS.NAMES](root=cfg.DATASETS.ROOT_DIR,crop_test = cfg.TEST.CROP_TEST)
-    train_set = ImageDataset(dataset.train, train_transforms)
+    if cfg.DATASETS.NAMES == 'aic_lftd':
+        train_set = LFTDDataset(dataset.train)
+    else:
+        train_set = ImageDataset(dataset.train, train_transforms)
     num_classes = dataset.num_train_pids
     if 'triplet' in cfg.DATALOADER.SAMPLER:
 
@@ -72,28 +82,33 @@ def make_dataloader(cfg):
                 train_set,
                 num_workers=num_workers,
                 batch_sampler=batch_sampler,
-                collate_fn=train_collate_fn,
+                collate_fn=train_collate_fn if not feat_extraction else val_collate_fn,
                 pin_memory=True,
             )
         else:
             train_loader = DataLoader(
                 train_set, batch_size=cfg.SOLVER.IMS_PER_BATCH,
                 sampler=RandomIdentitySampler(dataset.train, cfg.SOLVER.IMS_PER_BATCH, cfg.DATALOADER.NUM_INSTANCE),
-                num_workers=num_workers, collate_fn=train_collate_fn
+                num_workers=num_workers, collate_fn=train_collate_fn if not feat_extraction else val_collate_fn
             )
     elif cfg.DATALOADER.SAMPLER == 'softmax':
         print('using softmax sampler')
         train_loader = DataLoader(
             train_set, batch_size=cfg.SOLVER.IMS_PER_BATCH, shuffle=True, num_workers=num_workers,
-            collate_fn=train_collate_fn
+            collate_fn=train_collate_fn if not feat_extraction else val_collate_fn
         )
     else:
         print('unsupported sampler! expected softmax or triplet but got {}'.format(cfg.SAMPLER))
     if cfg.DATASETS.QUERY_MINING:
-
-        val_set = ImageDataset(dataset.query + dataset.query, val_transforms)
+        if cfg.DATASETS.NAMES == 'aic_lftd':
+            val_set = LFTDDataset(dataset.query + dataset.query)
+        else:
+            val_set = ImageDataset(dataset.query + dataset.query, val_transforms)
     else:
-        val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
+        if cfg.DATASETS.NAMES == 'aic_lftd':
+            val_set = LFTDDataset(dataset.query + dataset.gallery)
+        else:
+            val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
     val_loader = DataLoader(
         val_set, batch_size=cfg.TEST.IMS_PER_BATCH, shuffle=False, num_workers=num_workers,
         collate_fn=val_collate_fn
@@ -167,7 +182,10 @@ def get_trainloader_uda(cfg, trainset=None, num_classes=0):
 
     num_workers = cfg.DATALOADER.NUM_WORKERS
 
-    train_set = ImageDataset(trainset, train_transforms)
+    if cfg.MODEL.NAME == 'lftd':
+        train_set = LFTDDataset(trainset)
+    else:
+        train_set = ImageDataset(trainset, train_transforms)
 
     if 'triplet' in cfg.DATALOADER.SAMPLER:
 
@@ -227,7 +245,12 @@ def get_testloader_uda(cfg, aug=False):
 
     dataset = __factory[cfg.DATASETS.NAMES](root=cfg.DATASETS.ROOT_DIR, plus_num_id=cfg.DATASETS.PLUS_NUM_ID)
 
-    val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
+    if cfg.DATASETS.NAMES == 'aic_lftd':
+        dataset.query = dataset.query[::2]
+        dataset.gallery = dataset.gallery[::2]
+        val_set = LFTDDataset(dataset.query + dataset.gallery)
+    else:
+        val_set = ImageDataset(dataset.query + dataset.gallery, val_transforms)
     val_loader = DataLoader(
         val_set, batch_size=cfg.TEST.IMS_PER_BATCH, shuffle=False, num_workers=num_workers,
         collate_fn=val_collate_fn

@@ -83,3 +83,15 @@ class ImageDataset(Dataset):
             img = self.transform(img)
 
         return img, pid, camid, trackid,img_path.split('/')[-1]
+
+
+class LFTDDataset(Dataset):
+    def __init__(self, dataset):
+        self.dataset = dataset
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, index):
+        feat, pid, camid, trackid = self.dataset[index]
+        return feat, pid, camid, trackid, '{:06d}.jpg'.format(index)

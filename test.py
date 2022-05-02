@@ -40,11 +40,15 @@ if __name__ == "__main__":
 
     os.environ['CUDA_VISIBLE_DEVICES'] = cfg.MODEL.DEVICE_ID
 
-    train_loader, val_loader, num_query, num_classes = make_dataloader(cfg)
+    train_loader, val_loader, num_query, num_classes = make_dataloader(cfg, feat_extraction=True)
     model = make_model(cfg, num_class=num_classes)
     model.load_param(cfg.TEST.WEIGHT)
 
     do_inference(cfg,
                  model,
                  val_loader,
-                 num_query)
+                 num_query,
+                 output_feats=True,
+                 prefix='val')
+
+    do_inference(cfg, model, train_loader, num_query, output_feats=True, prefix='train')

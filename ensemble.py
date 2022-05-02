@@ -1,6 +1,9 @@
 import numpy as np
 import os
 
+
+
+
 distmat_paths = [
         './logs/stage2/resnext101a_384/v1/dist_mat.npy',
         './logs/stage2/resnext101a_384/v2/dist_mat.npy',
@@ -23,17 +26,42 @@ distmat_paths = [
         './logs/stage2/se_resnet101a_384/v1/dist_mat.npy',
         './logs/stage2/se_resnet101a_384/v2/dist_mat.npy',
 
+        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v1/dist_mat.npy',
+        'logs/stage2/swin_transformer/swin_transformer_224_80_epochs/v2/dist_mat.npy',
+
+        # './logs/stage2/swin_transformer/v1/dist_mat.npy',
+        # './logs/stage2/swin_transformer/v2/dist_mat.npy',
+
         './logs/stage2/transreid_256/v1/dist_mat.npy',
         './logs/stage2/transreid_256/v2/dist_mat.npy',
-        ]
+        #
+        # './logs/stage2/swin_transformer_spgan/v1/dist_mat.npy': 0.75,
+        # './logs/stage2/swin_transformer_spgan/v2/dist_mat.npy': 0.75,
 
+        # './logs/stage2/swin_transformer_384/v1/pth29/dist_mat.npy',
+        # './logs/stage2/swin_transformer_384/v2/pth29/dist_mat.npy',
+]
+
+# LFTD
+# distmat_paths = ['./logs/stage2/lftd/v1/dist_mat.npy']
+
+# method 1
 distmat = np.zeros((1103,31238))
 for i in distmat_paths:
     distmat += np.load(i)
 
+# method 2
+# distmat = np.zeros((1103,31238))
+# for i in distmat_paths:
+#     distmat += (np.load(i) ** 2)
+#
+# distmat = np.sqrt(distmat)
+
 sort_distmat_index = np.argsort(distmat, axis=1)
 print(sort_distmat_index)
 print('The shape of distmat is: {}'.format(distmat.shape))
+
+#save_path = './track_s2.txt'
 save_path = './track2.txt'
 with open(save_path,'w') as f:
     for item in sort_distmat_index:

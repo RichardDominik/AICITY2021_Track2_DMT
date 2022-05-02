@@ -12,7 +12,7 @@ class SIM_VIEW(BaseImageDataset):
     dataset_dir = 'AIC21/AIC21_Track2_ReID'
 
 
-    def __init__(self, root='/home/michuan.lh/datasets', verbose=True, **kwargs):
+    def __init__(self, root='/home/d/dominik3/diplomovka/dataset', verbose=True, **kwargs):
         super(SIM_VIEW, self).__init__()
         self.sim_dataset_dir = osp.join(root, self.sim_dataset_dir)
         self.dataset_dir = osp.join(root, self.dataset_dir)
@@ -94,4 +94,4 @@ class SIM_VIEW(BaseImageDataset):
         return tracklet, nums, frame2trackID
 
 if __name__ == '__main__':
-    aic = AIC(root='/home/michuan.lh/datasets')
+    aic = AIC(root='/home/d/dominik3/diplomovka/dataset')

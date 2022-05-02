@@ -135,4 +135,4 @@ class AIC_SIM(BaseImageDataset):
         return train
 
 if __name__ == '__main__':
-    aic = AIC(root='/home/michuan.lh/datasets')
+    aic = AIC(root='/home/d/dominik3/diplomovka/dataset')

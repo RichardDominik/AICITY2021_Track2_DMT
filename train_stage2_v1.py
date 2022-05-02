@@ -104,8 +104,15 @@ def extract_features(model, data_loader, print_freq):
 
 def calc_distmat(feat):
     rerank_distmat = compute_jaccard_distance(feat, k1=30, k2=6, search_option=3)
+    print("Rerank distmat shape: ", rerank_distmat.shape)
     cosine_distmat = batch_cosine_dist(feat, feat).cpu().numpy()
-    final_dist = rerank_distmat * 0.9 + cosine_distmat * 0.1
+    print("Cosine distmat shape: ", cosine_distmat.shape)
+
+    rerank_distmat *= 0.9
+    cosine_distmat *= 0.1
+    rerank_distmat += cosine_distmat
+    final_dist = rerank_distmat
+    # final_dist = rerank_distmat * 0.9 + cosine_distmat * 0.1
 
     return final_dist
 
@@ -199,11 +206,13 @@ if __name__ == '__main__':
 
     os.environ['CUDA_VISIBLE_DEVICES'] = cfg.MODEL.DEVICE_ID
     val_loader, num_query, testset = get_testloader_uda(cfg)
-    aug_loader, num_query, _ = get_testloader_uda(cfg, aug=True)
+    if cfg.MODEL.NAME != 'lftd':
+        aug_loader, num_query, _ = get_testloader_uda(cfg, aug=True)
 
     num_classes = 1500
     model = make_model(cfg, num_class=num_classes)
     initial_weights = torch.load(cfg.MODEL.PRETRAIN_PATH, map_location='cpu')
+    # print("Initial weights:", initial_weights)
     copy_state_dict(initial_weights, model)
 
 
@@ -216,12 +225,13 @@ if __name__ == '__main__':
 
     for epoch in range(cfg.SOLVER.MAX_EPOCHS):
 
-        if epoch % 3 == 0: # and epoch < 9) or (epoch % 6 == 0):
+        if epoch % 30 == 0: # and epoch < 9) or (epoch % 6 == 0):
             target_features, target_labels, target_camids, target_trkids = extract_features(model, val_loader, print_freq=100)
             target_features = F.normalize(target_features, dim=1)
-            aug_features, _, _, _ = extract_features(model, aug_loader, print_freq=100)
-            aug_features = F.normalize(aug_features, dim=1)
-            target_features = (aug_features + target_features) / 2.0
+            if cfg.MODEL.NAME != 'lftd':
+                aug_features, _, _, _ = extract_features(model, aug_loader, print_freq=100)
+                aug_features = F.normalize(aug_features, dim=1)
+                target_features = (aug_features + target_features) / 2.0
             P, neg_vec = compute_P2(target_features, target_features, target_camids, la=cfg.STAGE2.LA)
             target_features = meanfeat_sub(P, neg_vec, target_features, target_camids)
 
@@ -241,8 +251,11 @@ if __name__ == '__main__':
             final_dist = calc_distmat(target_features)
             final_dist[final_dist < 0.0] = 0.0
             final_dist[final_dist > 1.0] = 1.0
+            print("DBSCAN started")
             cluster = DBSCAN(eps=cfg.STAGE2.EPS, min_samples=10, metric='precomputed', n_jobs=-1)
+            print("DBSCAN finished")
             pseudo_labels = cluster.fit_predict(final_dist)
+            print("Pseudo labels generated")
             labelset = list(set(pseudo_labels[pseudo_labels >= 0]))
             idxs = np.where(np.in1d(pseudo_labels, labelset))
             psolabels = pseudo_labels[idxs]
